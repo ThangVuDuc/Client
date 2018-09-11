@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import pic1 from '../img/pic1.jpg';
-import pic2 from '../img/pic2.jpg';
-import pic3 from '../img/pic3.jpg';
+import pic1 from '../img/pic1.png';
+import pic2 from '../img/pic2.png';
+import pic3 from '../img/pic3.png';
 
 import Slider from "react-slick";
 
@@ -9,15 +9,15 @@ class Banner extends Component {
   render() {
     const settings = {
       fade:true,
-      pauseOnHover:true,
       dots: true,
       infinite: true,
-      arrows: false,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      arrows:false,autoplay: true,
+      autoplaySpeed: 2000,
     };
     return (
-      <div className="banner container-fluid">
+      <div className="banner">
         <Slider {...settings}>
           <div>
             <img src={pic1}/>
@@ -28,7 +28,7 @@ class Banner extends Component {
           <div>
           <img src={pic3}/>
           </div>
-        </Slider>
+        </Slider> 
       </div>
     );
   }

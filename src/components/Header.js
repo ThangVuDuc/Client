@@ -5,7 +5,7 @@ import {
     Route,
     Link
 } from 'react-router-dom'
-
+import Facebook from './LoginFace';
 import logo from '../img/logo.png';
 class header extends Component {
     render() {
@@ -26,7 +26,7 @@ class header extends Component {
                         </div>
                     </div>
                     <div className='col-3 text-right'>
-                        <button className='btn btn-primary'>Đăng nhập bằng Facebook <i className="fab fa-facebook-square"></i></button>
+                        <Facebook/>
                     </div>
                 </div>
             </nav>

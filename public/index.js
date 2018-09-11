@@ -1,11 +1,4 @@
 $(document).ready(function () {
-    $('.slide').slick({
-        dots: true,
-        slidesToScroll: 1,
-        autoplay: true,
-        autoplaySpeed: 3000,
-        fade: true,
-    });
     $(".userInputCM").on("focus", function () {
         $(".addComment").addClass("show")
     })
@@ -38,6 +31,7 @@ $(document).ready(function () {
 
     var element_position = $('.cart').offset().top;
     $(window).on('scroll', function () {
+        console.log("ok")
         var y_scroll_pos = window.pageYOffset;
         var scroll_pos_test = element_position - 50;
 
