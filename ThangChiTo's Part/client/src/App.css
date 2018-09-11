@@ -1,0 +1,37 @@
+.img-logo {
+  width: 100%;
+  margin-top: 3px
+}
+
+.food-list {
+  margin-left: 30px
+}
+
+.orderlist {
+  margin-top: 40px
+}
+
+
+.banner {
+  margin-top: 100px;
+}
+
+.banner img {
+  margin: auto;
+}
+
+Footer {
+background-color:#edf0f7;
+}
+
+.logo {
+  width: 35%;
+}
+
+.logo1 {
+  width: 65%;
+}
+
+.footer-copyright {
+  background-color: white;
+}
