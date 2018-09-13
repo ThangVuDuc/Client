@@ -31,7 +31,6 @@ $(document).ready(function () {
 
     var element_position = $('.cart').offset().top;
     $(window).on('scroll', function () {
-        console.log("ok")
         var y_scroll_pos = window.pageYOffset;
         var scroll_pos_test = element_position - 50;
 
@@ -42,7 +41,6 @@ $(document).ready(function () {
             $('.cart').removeClass('fixedCart')
         }
         if(window.pageYOffset>200){
-            console.log("ok")
             $('.banner').addClass("navBg")
         }
     });
