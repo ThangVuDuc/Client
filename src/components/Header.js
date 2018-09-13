@@ -8,14 +8,23 @@ import {
 import Facebook from './LoginFace';
 import logo from '../img/logo.png';
 class header extends Component {
+    componentDidMount=()=>{
+        window.addEventListener('scroll', this.handleScroll);
+    }
+    handleScroll= (event)=> {
+        if(window.pageYOffset>50){
+            document.getElementsByClassName("header")[0].classList.add("headerBg");
+        }
+        else{
+            document.getElementsByClassName("header")[0].classList.remove("headerBg");
+        }
+    }
     render() {
         return (
             <nav className=' header navbar fixed-top navber-expland-lg navbar-light bg-light'>
                 <div className='container' >
                     <div className='col-3'>
-                        <a className='navbar-brand' href='#' >
-                            <Link to="/"><span><img src={logo} className='img-logo' alt='logo' /></span></Link>
-                        </a>
+                        <Link to="/"><span><img src={logo} className='img-logo' alt='logo' /></span></Link>
                     </div>
                     <div className='col-5'>
                         <div className='input-group'>
@@ -26,7 +35,7 @@ class header extends Component {
                         </div>
                     </div>
                     <div className='col-3 text-right'>
-                        <Facebook/>
+                        <Facebook />
                     </div>
                 </div>
             </nav>

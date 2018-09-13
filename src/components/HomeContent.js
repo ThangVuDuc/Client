@@ -1,5 +1,10 @@
 import React, { Component } from 'react';
 import axios from 'axios'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link
+} from 'react-router-dom'
 class HomeContent extends Component {
 
   state = {
@@ -9,31 +14,33 @@ class HomeContent extends Component {
   componentDidMount = () => {
     axios.get('http://localhost:8080/shop')
       .then((response) => {
-        this.setState({ shops: response.data.shops })
-        console.log(this.state.shops)
+        console.log(response)
+        this.setState({ shops: response.data.shopFound })
       })
       .catch(function (error) {
-        // handle error
         console.log(error);
       })
   }
  
   render() {
-    var allShops=this.state.shops.map(shop => {
-      console.log(shop._id)
-      return (
-        <div key={shop._id} className="col-lg-4 col-sm-6 portfolio-item">
-          <div className="card h-100">
-            <a href={"/shop/"+shop._id}><img className="card-img-top" src={shop.owner.avatarUrl} alt="" /></a>
-            <div className="card-body">
-              <h4 className="card-title">
-                <a href="">{shop.title}</a>
-              </h4>
-              <p className="card-text">{shop.description}</p>
+    var allShops
+    if(this.state.shops){
+      allShops=this.state.shops.map(shop => {
+        console.log(shop)
+        return (
+          <Link to={"/shop/" + shop._id} key={shop._id} className="col-lg-4 col-sm-6 portfolio-item mb-3">
+            <div className="card h-100">
+            {shop.productList[0] ? <img className="card-img-top" src={shop.productList[0].image} alt="" /> : ""}
+              <div className="card-body">
+                <h4 className="card-title">
+                  <div>{shop.title}</div>
+                </h4>
+                <p className="card-text">{shop.description}</p>
+              </div>
             </div>
-          </div>
-        </div>
-      )})
+          </Link>
+        )})
+    }
     return (
       <div className="container mt-3">
         <div className="row">

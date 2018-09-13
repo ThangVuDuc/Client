@@ -11,7 +11,7 @@ css {
 
 .details{
     background: #fff;
-    margin-top: 0
+    margin-top: 80px
 }
 .containerSlide{padding: 0!important;}
 .containerSlide .slick-next{
@@ -291,7 +291,7 @@ transition: .3s;
     top: 0px;
     font-weight:  bold;
 }
-.cart{width: 100%;}
+.cart{width: 100%;cursor: pointer;z-index: 1000;}
 .cart i{font-size: 50px;color: firebrick;}
 .fixedCart{
     position: fixed;
@@ -369,7 +369,12 @@ transition: .3s;
     padding: 0;
   }
   .header{
-      background: transparent!important
+      background: transparent!important;
+      transition: .5s;
+  }
+  .header.headerBg{
+      background:#e5e5e5!important;
+      transition: .5s;
   }
   .header.navBg{
       background: #eee!important
