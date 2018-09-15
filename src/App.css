@@ -399,3 +399,20 @@ transition: .3s;
   .footer-copyright {
     background-color: white;
   }
+  .loginButton{
+    background: #4267B2;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    margin-right: 10px;
+    color: white;
+    cursor: pointer
+  }
+  .logoutButton{
+    background: #4267B2;
+    border: none;
+    padding: 10px;
+    color: white;
+    cursor: pointer;
+    border-radius: 5px;;
+  }

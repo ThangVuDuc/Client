@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Header from '../components/Header'
 import FooterPage from '../components/FooterPage'
 import Banner from '../components/Banner'
+import domain from "../domainBE.js"
 
 import axios from 'axios'
 import Moment from 'react-moment';
@@ -10,10 +11,32 @@ import {
     Route,
     Link
 } from 'react-router-dom'
+
 class Shop extends Component {
     state = {
         shop: "",
-        shops: []
+        shops: [],
+    }
+    componentWillReceiveProps(nextProps) {
+        if (this.props.match.params.id !== nextProps.match.params.id) {
+            this.getData(nextProps.match.params.id);
+        }
+    }
+    getData = (param) => {
+        axios.get(domain.domain + "/shop/" + param)
+            .then((response) => {
+                this.setState({ shop: response.data.shopFound })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
+        axios.put(domain.domain + '/shop')
+            .then((response) => {
+                this.setState({ shops: response.data.shops })
+            })
+            .catch(function (error) {
+                console.log(error);
+            })
     }
     componentDidMount() {
         // window.scrollBy({
@@ -21,20 +44,8 @@ class Shop extends Component {
         //     left: 0,
         //     behavior: 'smooth'
         // });
-        axios.get('http://localhost:8080/shop/' + this.props.match.params.id)
-            .then((response) => {
-                this.setState({ shop: response.data.shopFound })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-        axios.put('http://localhost:8080/shop')
-            .then((response) => {
-                this.setState({ shops: response.data.shops })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
+        this.getData(this.props.match.params.id)
+
     }
     render() {
         var allProduct, slide, comments, related;

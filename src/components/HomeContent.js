@@ -5,6 +5,8 @@ import {
   Route,
   Link
 } from 'react-router-dom'
+import domain from "../domainBE.js"
+
 class HomeContent extends Component {
 
   state = {
@@ -12,9 +14,9 @@ class HomeContent extends Component {
   }
 
   componentDidMount = () => {
-    axios.get('http://localhost:8080/shop')
+    axios.get(domain.domain+'/shop')
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         this.setState({ shops: response.data.shopFound })
       })
       .catch(function (error) {
@@ -26,7 +28,7 @@ class HomeContent extends Component {
     var allShops
     if(this.state.shops){
       allShops=this.state.shops.map(shop => {
-        console.log(shop)
+        // console.log(shop)
         return (
           <Link to={"/shop/" + shop._id} key={shop._id} className="col-lg-4 col-sm-6 portfolio-item mb-3">
             <div className="card h-100">
