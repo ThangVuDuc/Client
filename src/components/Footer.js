@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { Col, Container, Row, Footer } from 'mdbreact';
 import logo from '../img/logo.png';
 import logo1 from '../img/logo1.png';
-class FooterPage extends Component {
-    render() {
-        return (
+
+class FooterPage extends React.Component {
+    render(){
+        return(
             <Footer className="font-small pt-4 mt-4">
                 <Container fluid className="text-center text-md-left">
                     <Row>
@@ -50,9 +51,8 @@ class FooterPage extends Component {
                     </Container>
                 </div>
             </Footer>
-
         );
-    } 
+    }
 }
 
 export default FooterPage;
