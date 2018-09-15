@@ -14,7 +14,8 @@ class Banner extends Component {
       dots: true,
       infinite: true,
       slidesToShow: 1,
-      slidesToScroll: 1
+      slidesToScroll: 1,
+      arrows: false
     };
     return (
       <div className="banner">
