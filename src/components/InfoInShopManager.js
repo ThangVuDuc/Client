@@ -13,7 +13,7 @@ class InfoInShopManager extends Component {
 
 
     changeIsUpdate = () => {
-        console.log(this.props.shopData.title);
+        console.log(this.props.shopDataBo.title);
         this.setState({
             isUpdate: !this.state.isUpdate
         })
@@ -21,17 +21,17 @@ class InfoInShopManager extends Component {
 
     render() {
 
-        const shopStatut = (this.props.openOrClose) ? <Badge color='success' >Mở cửa</Badge> : <Badge color='danger' >Đóng cửa</Badge>;
+        const shopStatut = (this.props.shopDataBo.openOrClose) ? <Badge color='success' >Mở cửa</Badge> : <Badge color='danger' >Đóng cửa</Badge>;
 
-        const isUpdateInfo = (!this.state.isUpdate) ?
+        const isUpdateInfo = (!this.state.isUpdate && this.props.shopDataBo) ?
             <Row>
                 <Col sm='12'>
                     <span><em>Cửa hàng của bạn:</em></span>
                 </Col>
                 <Col sm='12' lg='9' >
 
-                    <h1 className='text-info display-3'>{this.props.shopData.title}</h1>
-                    <h5 className='ml-3' >{this.props.shopData.description}</h5>
+                    <h1 className='text-info display-3'>{this.props.shopDataBo.title}</h1>
+                    <h5 className='ml-3' >{this.props.shopDataBo.description}</h5>
                     <p className='ml-5' >Trạng thái: {shopStatut}</p>
                 </Col>
                 <Col sm='12' lg='3' className='text-right' >
@@ -40,7 +40,7 @@ class InfoInShopManager extends Component {
                 <Col>
 
                 </Col>
-            </Row> : <UpdateInfoInShopManager shopData={this.props.shopData} changeIsUpdate={this.changeIsUpdate} />;
+            </Row> : <UpdateInfoInShopManager shopDataCon={this.props.shopDataBo} changeIsUpdate={this.changeIsUpdate} />;
 
         return (
             <div>

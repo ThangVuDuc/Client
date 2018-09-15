@@ -8,7 +8,7 @@ import InfoInShopManager from '../InfoInShopManager';
 
 class ShopManager extends Component {
     state = {
-        shopData: null,
+        shopDataOng: null,
         file: null
     }
 
@@ -18,7 +18,7 @@ class ShopManager extends Component {
             .then(res => {
                 console.log(res.data)
                 this.setState({
-                    shopData: res.data.shopFound
+                    shopDataOng: res.data.shopFound
                 })
             })
     }
@@ -34,7 +34,7 @@ class ShopManager extends Component {
 
     render() {
 
-        const showInfoShop = (this.state.shopData) ? <InfoInShopManager shopData={this.state.shopData} UpdateInfo={this.UpdateInfo} /> : '';
+        const showInfoShop = (this.state.shopDataOng) ? <InfoInShopManager shopDataBo={this.state.shopDataOng} UpdateInfo={this.UpdateInfo} /> : '';
 
         return (
             <div className='banner'>
@@ -42,7 +42,7 @@ class ShopManager extends Component {
                     <div className='shadow p-3 mb-5 bg-white rounded img-thumbnail' >
                         {showInfoShop}
                         <hr />
-                        <ProductInShopManager productList={(this.state.shopData) ? this.state.shopData.productList : null} />
+                        <ProductInShopManager productList={(this.state.shopDataOng) ? this.state.shopDataOng.productList : null} />
                     </div>
                 </Container>
             </div>
