@@ -1,12 +1,13 @@
 import React, { Component } from 'react';
-import FacebookLogin from 'react-facebook-login';
+// import FacebookLogin from 'react-facebook-login';
 import {
     BrowserRouter as Router,
     Route,
     Link
 } from 'react-router-dom'
-import Facebook from './LoginFace';
+// import Facebook from './LoginFace';
 import logo from '../img/logo.png';
+import domain from "../domainBE.js"
 class header extends Component {
     componentDidMount=()=>{
         window.addEventListener('scroll', this.handleScroll);
@@ -35,7 +36,13 @@ class header extends Component {
                         </div>
                     </div>
                     <div className='col-3 text-right'>
-                        <Facebook />
+                        {/* <Facebook /> */}
+                        <a href={domain.domain+"/auth/fb"}>
+                             <button type="button" name="button" className="loginButton" >Login with Facebook</button>
+                        </a>
+                        <a href={domain.domain+"/auth/logout"}>
+                             <button type="button" name="button"  className="logoutButton">Logout</button>
+                        </a>
                     </div>
                 </div>
             </nav>

@@ -2,9 +2,8 @@ import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
   Route,
-  Link
+  Link,Switch
 } from 'react-router-dom'
-
 import './App.css';
 import Home from './containers/Home'
 import Shop from './containers/Shop'
