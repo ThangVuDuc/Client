@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getShopById } from "../../networks/shopData";
-import ProductInShopManager from '../ProductInShopManager';
-import InfoInShopManager from '../InfoInShopManager';
+import { getShopById } from "../networks/shopData";
+import ProductInShopManager from '../components/ProductInShopManager';
+import InfoInShopManager from '../components/InfoInShopManager';
 
 
 class ShopManager extends Component {

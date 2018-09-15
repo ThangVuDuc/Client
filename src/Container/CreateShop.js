@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { withRouter } from 'react-router-dom';
-import { createShop } from "../../networks/shopData";
+import { createShop } from "../networks/shopData";
 import { Container, Row, Col, InputGroup, InputGroupAddon, Input, Button, Modal, Form, ModalBody, ModalFooter } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 
