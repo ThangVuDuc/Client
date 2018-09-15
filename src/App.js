@@ -20,16 +20,16 @@ class App extends Component {
     createShopModal: false
   }
 
-  componentDidMount = () => {
-        axios.get(ROOT_API + "/auth/fb/isLogin")
-            .then((response) => {
-                console.log(response)
-                // this.setState({ shops: response.data.shopFound })
-            })
-            .catch(function (error) {
-                console.log(error);
-            })
-    }
+  // componentDidMount = () => {
+  //       axios.get(ROOT_API + "/auth/fb/isLogin")
+  //           .then((response) => {
+  //               console.log(response)
+  //               // this.setState({ shops: response.data.shopFound })
+  //           })
+  //           .catch(function (error) {
+  //               console.log(error);
+  //           })
+  //   }
 
   modalShopIsOpen = () => {
     this.setState({

@@ -14,9 +14,8 @@ class HomeContent extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(`${ROOT_API}/shop`)
+    axios.get(`${ROOT_API}/shop`) 
       .then((response) => {
-        console.log(response)
         this.setState({ shops: response.data.shopFound })
       })
       .catch(function (error) {

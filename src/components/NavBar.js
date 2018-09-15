@@ -26,7 +26,6 @@ class NavBar extends Component {
                             </div>
                         </div>
                         <Facebook modalShopIsOpen={this.props.modalShopIsOpen} />
-
                     </div>
                 </nav>
 
