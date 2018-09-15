@@ -9,16 +9,7 @@ class home extends Component {
     state = {
         isLogin: false
     }
-    // componentDidMount = () => {
-    //     axios.get(domain.domain + "/auth/fb/isLogin")
-    //         .then((response) => {
-    //             console.log(response)
-    //             // this.setState({ shops: response.data.shopFound })
-    //         })
-    //         .catch(function (error) {
-    //             console.log(error);
-    //         })
-    // }
+
     render() {
         return (
             <div>

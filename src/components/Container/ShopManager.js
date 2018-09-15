@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { Container, Row, Col, Button } from "reactstrap";
-import { Badge } from "mdbreact";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getShopById } from "../../networks/shopData";
-import { uploadFile } from "../../networks/imgurData";
-import Base64 from 'react-file-base64';
-import ProductInShopManager from './ProductInShopManager';
+import ProductInShopManager from '../ProductInShopManager';
+import InfoInShopManager from '../InfoInShopManager';
 
 
 class ShopManager extends Component {
@@ -25,54 +23,18 @@ class ShopManager extends Component {
             })
     }
 
-    getFiles = (file) => {
+    UpdateInfo = (updateData) => {
+
         // this.setState({
-        //     file: {
-        //         image: file.base64,
-        //         title: ,
-        //         name :
-        //         type
-        //     }
-        // });
-        // console.log(this.state.file);
-        // uploadFile(this.state.file)
-
-        // uploadFile(this.state.file)
-        //     .then(res => {
-        //         console.log(res);
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //     })
+        //     shopData: updateData
+        // })
+        console.log(updateData);
+        
     }
-
 
     render() {
 
-        const shopStatut = (this.props.openOrClose) ? <Badge color='success' >Mở cửa</Badge> : <Badge color='danger' >Đóng cửa</Badge>;
-
-
-        const showInfoShop = (this.state.shopData) ?
-            <Row>
-                <Col sm='12'>
-                    <span><em>Cửa hàng của bạn:</em></span>
-                </Col>
-                <Col sm='12' lg='9' >
-
-                    <h1 className='text-info display-3'>{this.state.shopData.title}</h1>
-                    <h5 className='ml-3' >{this.state.shopData.description}</h5>
-                    <p className='ml-5' >Trạng thái: {shopStatut}</p>
-                </Col>
-                <Col sm='12' lg='3' className='text-right' >
-                    <Button size='sm' outline >Thay đổi thông tin cửa hàng</Button>
-                </Col>
-                <Col>
-
-                </Col>
-            </Row> : ''
-
-
-
+        const showInfoShop = (this.state.shopData) ? <InfoInShopManager shopData={this.state.shopData} UpdateInfo={this.UpdateInfo} /> : '';
 
         return (
             <div className='banner'>
