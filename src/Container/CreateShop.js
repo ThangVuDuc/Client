@@ -9,9 +9,10 @@ class CreateShop extends Component {
         shopData: {
             title: null,
             description: null,
-            owner: '5b9798e2c685d7050ecda54a'
+            owner: null
         }
     }
+
 
     handleInputChange = (e) => {
         let data = this.state.shopData;
@@ -23,12 +24,18 @@ class CreateShop extends Component {
     }
 
     handleSubmit = (e) => {
+
         e.preventDefault();
+        let data = this.state.shopData;
+        data.owner = this.props.userData._id
+        this.setState({
+            shopData: data
+        });
         createShop(this.state.shopData)
             .then(res => {
-                console.log(res.data.shopCreated._id);
+                console.log(this.state.shopData);
                 this.props.modalShopIsOpen();
-                this.props.history.push(`/shop/${res.data.shopCreated._id}/manager`);
+                window.location.href = `/shop/${res.data.shopCreated._id}/manager` ;
             })
     }
 
@@ -37,7 +44,7 @@ class CreateShop extends Component {
             shopData: {
                 title: null,
                 description: null,
-                owner: this.state.shopData.owner
+                owner: null
             }
         });
         this.props.modalShopIsOpen();

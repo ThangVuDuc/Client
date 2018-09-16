@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import Banner from '../components/Banner'
 
 import { ROOT_API } from "../static/index";
+import OrderListInShop from '../components/OrderListInShop';
 
 import axios from 'axios'
 import Moment from 'react-moment';
@@ -10,7 +11,6 @@ import {
     Route,
     Link
 } from 'react-router-dom'
-import OrderListInShop from '../components/OrderListInShop';
 
 class Shop extends Component {
     state = {
@@ -20,8 +20,13 @@ class Shop extends Component {
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
             this.getData(nextProps.match.params.id);
+            window.scroll({
+                top: 0,
+                behavior: 'smooth' 
+              });
         }
     }
+    
     getData = (param) => {
         axios.get(ROOT_API + "/shop/" + param)
             .then((response) => {
@@ -39,6 +44,10 @@ class Shop extends Component {
             })
     }
     componentDidMount() {
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
         document.querySelector(".userInputCM").onfocus = function () {
             document.querySelector(".addComment").classList.add("show")
         }
@@ -97,7 +106,7 @@ class Shop extends Component {
             })
             allProduct = this.state.shop.productList.map((product, index) => {
                 return (
-                    <div key={index} className={"oneFood " + "food" + index + " mb-3"}>
+                    <div className={"oneFood " + "food" + index + " mb-3"}>
                         <div className="foodImg">
                             <img src={product.image} />
                         </div>
@@ -126,15 +135,14 @@ class Shop extends Component {
                                             {this.state.shop.owner ? <img src={this.state.shop.owner.avatarUrl} /> : ""}
                                         </div>
                                         <div className="cart mt-3">
-                                            {(this.state.shop) ? <OrderListInShop orderData={this.state.shop.listOrder} /> : ''}
+                                        {(this.state.shop) ? <OrderListInShop orderData={this.state.shop.listOrder} /> : ''}
                                         </div>
                                     </div>
                                     <div className="mainStatus col-md-10">
-                                    {this.state.shop.owner ? <h3>{this.state.shop.title}</h3> : ""}
-                                        <h5>
+                                        <h4>
                                             {this.state.shop.owner ? <a >{this.state.shop.owner.name}</a> : ""}
-                                        </h5>
-                                        
+                                        </h4>
+                                        {this.state.shop.owner ? <h5>{this.state.shop.title}</h5> : ""}
                                         {this.state.shop.owner ? <p>{this.state.shop.description}</p> : ""}
                                         <div className="foodShop">
                                             {allProduct}

@@ -8,7 +8,8 @@ class Logined extends Component {
         orderModalOpen: false,
         orderData: {
             orderLength: null
-        }
+        },
+        facebookData:null
 
     }
 
@@ -39,6 +40,10 @@ class Logined extends Component {
         console.log(this.props)
     }
 
+    showwww = () => {
+        console.log(this.props)
+    }
+
 
     render() {
         let orderCount = (this.state.orderData.orderLength) ? ( this.state.orderData.orderLength) : '';
@@ -47,7 +52,7 @@ class Logined extends Component {
             <ButtonGroup>
                 <Button color='danger' onClick={this.modalToggle} >{orderCount}<i className="fas fa-shopping-cart"></i></Button>
                 <OrderCache orderModal={this.state.orderModalOpen} toggle={this.modalToggle} setOrderLength={this.setOrderLength} />
-                <Button disabled>{this.props.facebookData.name}</Button>
+                <Button disabled >{(this.props.userData) ? this.props.userData.name : ''}</Button>
                 <ButtonDropdown isOpen={this.state.dropdownUserOpen} toggle={this.userToggle}>
                     <DropdownToggle color='success' caret></DropdownToggle>
                     <DropdownMenu right>
@@ -59,12 +64,12 @@ class Logined extends Component {
                         </DropdownItem>
                         <DropdownItem onClick={this.MyShopLink} >
                             {/* <Link to='/checkout'> */}
-                                <span className='text-primary textDeco ' ><i className="fas fa-user"></i> Cửa hàng của tôi</span>
+                                <span><span className='text-primary textDeco ' ><i className="fas fa-user"></i></span> Cửa hàng của tôi</span>
                             {/* </Link> */}
                         </DropdownItem>
                         <DropdownItem divider />
-                        <DropdownItem>
-                            <span className='text-danger' ><i className="fas fa-sign-out-alt"></i> </span> Đăng xuất
+                        <DropdownItem  onClick={this.props.fbLogout}>
+                            <span><span className='text-danger' ><i className="fas fa-sign-out-alt"></i> </span> Đăng xuất</span>
                         </DropdownItem>
                     </DropdownMenu>
                 </ButtonDropdown>

@@ -2,19 +2,21 @@ import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Col, Row, Form, ButtonGroup, InputGroup, InputGroupAddon, ModalFooter, Input } from "reactstrap";
 import { Button, Badge } from "mdbreact";
+import { getShopById } from "../networks/shopData";
 
 class UpdateInfoInShopManager extends Component {
     state = {
-        shopDataChau: null,
-        dataBackup: null
+        shopData: null
     }
 
     componentDidMount() {
-        console.log("aaaaa");
-        this.setState({
-            shopDataChau: this.props.shopDataCon,
-            dataBackup: this.props.shopDataCon
-        })
+        console.log(this.props)
+        getShopById(this.props.shopID)
+            .then(res => {
+                this.setState({
+                    shopData: res.data.shopFound
+                })
+            })
     }
 
     isOpenOrClose = () => {
@@ -26,12 +28,11 @@ class UpdateInfoInShopManager extends Component {
     }
 
     handleInputChange = (e) => {
-        let data = this.state.shopDataChau;
+        let data = this.state.shopData;
         data[e.target.name] = e.target.value;
         this.setState({
-            shopDataChau: data
+            shopData: data
         });
-        console.log(this.props.shopDataCon.title)
     }
 
     handleCancelButton = () => {
@@ -44,7 +45,7 @@ class UpdateInfoInShopManager extends Component {
 
     render() {
 
-        const updateForm = (this.state.shopDataChau) ? <Form>
+        const updateForm = (this.state.shopData) ? <Form>
             <Row>
                 <Col sm='12' md={{ size: 10, offset: 1 }} >
                     <h2>Thay đổi thông tin</h2>
@@ -52,7 +53,7 @@ class UpdateInfoInShopManager extends Component {
                         <InputGroupAddon addonType="prepend">
                             <Button color='success' disabled><i className="fas fa-home"></i></Button>
                         </InputGroupAddon>
-                        <Input name='title' onChange={this.handleInputChange} type='text' value={this.state.shopDataChau.title} required />
+                        <Input name='title' onChange={this.handleInputChange} type='text' value={this.state.shopData.title} required />
                     </InputGroup>
                     <br />
                     <InputGroup >
@@ -60,7 +61,7 @@ class UpdateInfoInShopManager extends Component {
                         <InputGroupAddon addonType="prepend">
                             <Button size='sm' color='info' disabled><i className="fas fa-pencil-alt"></i></Button>
                         </InputGroupAddon>
-                        <Input name='description' onChange={this.handleInputChange} type='textarea' value={this.state.shopDataChau.description} />
+                        <Input name='description' onChange={this.handleInputChange} type='textarea' value={this.state.shopData.description} />
                     </InputGroup>
                     <br />
                 </Col>
@@ -69,8 +70,8 @@ class UpdateInfoInShopManager extends Component {
                 </Col>
                 <Col sm='3' className='text-left'>
                     <ButtonGroup>
-                        <Button color="danger" outline onClick={() => this.isOpenOrClose} active={this.state.shopDataChau.openOrClose === false}>Đóng cửa</Button>
-                        <Button color="success" outline onClick={() => this.isOpenOrClose} active={this.state.shopDataChau.openOrClose === true}>Mở cửa</Button>
+                        <Button color="danger" outline onClick={this.isOpenOrClose} active={this.state.shopData.openOrClose === false}>Đóng cửa</Button>
+                        <Button color="success" outline onClick={this.isOpenOrClose} active={this.state.shopData.openOrClose === true}>Mở cửa</Button>
                     </ButtonGroup>
                 </Col>
                 <Col sm='6' className='text-center'>

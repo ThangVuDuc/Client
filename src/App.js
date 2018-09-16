@@ -16,7 +16,8 @@ import { ROOT_API } from "./static/index";
 
 class App extends Component {
   state = {
-    createShopModal: false
+    createShopModal: false,
+    userData: null
   }
 
   componentDidMount = () => {
@@ -36,11 +37,18 @@ class App extends Component {
     })
   }
 
+  _setData = (res) => {
+    this.setState({
+      userData: res[0]
+    });
+    console.log(this.state.userData)
+  }
+
   render() {
     return (
       <BrowserRouter>
         <div id="main">
-          <NavBar modalShopIsOpen={this.modalShopIsOpen} />
+          <NavBar modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} setdata={this._setData} />
           <Switch>
             <Route exact path='/' component={home} />
             <Route exact path='/shop/:id' render={(props) => {
@@ -53,7 +61,7 @@ class App extends Component {
               return <Cart {...props} />
             }} />
           </Switch>
-          <CreateShop createShopModal={this.state.createShopModal} modalShopIsOpen={this.modalShopIsOpen} />
+          <CreateShop createShopModal={this.state.createShopModal} modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} />
           <FooterPage />
 
         </div>

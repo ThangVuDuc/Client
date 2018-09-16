@@ -8,13 +8,15 @@ import InfoInShopManager from '../components/InfoInShopManager';
 
 class ShopManager extends Component {
     state = {
-        shopDataOng: null,
-        file: null
+        shopDataOng: null
     }
 
     componentDidMount() {
-        let id = '5b968b5be4150252f00b4986';
-        getShopById(id)
+        this.setState({
+            shopDataOng: null
+        })
+        console.log(this.props.match.params.id)
+        getShopById(this.props.match.params.id)
             .then(res => {
                 console.log(res.data)
                 this.setState({
