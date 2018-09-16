@@ -20,7 +20,6 @@ class CreateShop extends Component {
         this.setState({
             shopData: data
         });
-        console.log(this.state.shopData)
     }
 
     handleSubmit = (e) => {
@@ -33,7 +32,6 @@ class CreateShop extends Component {
         });
         createShop(this.state.shopData)
             .then(res => {
-                console.log(this.state.shopData);
                 this.props.modalShopIsOpen();
                 window.location.href = `/shop/${res.data.shopCreated._id}/manager` ;
             })

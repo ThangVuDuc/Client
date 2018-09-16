@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Row, Form, ButtonGroup, InputGroup, InputGroupAddon, ModalFooter, Input } from "reactstrap";
-import { Button, Badge } from "mdbreact";
+import { Col, Row, Form, ButtonGroup, InputGroup, InputGroupAddon, Input } from "reactstrap";
+import { Button } from "mdbreact";
 import { getShopById } from "../networks/shopData";
+import { updateInfoShopByID } from "../networks/shopData";
 
 class UpdateInfoInShopManager extends Component {
     state = {
@@ -10,11 +11,16 @@ class UpdateInfoInShopManager extends Component {
     }
 
     componentDidMount() {
-        console.log(this.props)
         getShopById(this.props.shopID)
             .then(res => {
+                let data = res.data.shopFound;
                 this.setState({
-                    shopData: res.data.shopFound
+                    shopData: {
+                        id: data._id,
+                        title: data.title,
+                        description: data.description,
+                        openOrClose: data.openOrClose
+                    }
                 })
             })
     }
@@ -43,9 +49,17 @@ class UpdateInfoInShopManager extends Component {
 
     }
 
+    handleSubmitButton = (e) => {
+        e.preventDefault();
+        updateInfoShopByID(this.state.shopData)
+            .then(res => {
+                window.location.href = window.location.href
+            })
+    }
+
     render() {
 
-        const updateForm = (this.state.shopData) ? <Form>
+        const updateForm = (this.state.shopData) ?
             <Row>
                 <Col sm='12' md={{ size: 10, offset: 1 }} >
                     <h2>Thay đổi thông tin</h2>
@@ -76,11 +90,11 @@ class UpdateInfoInShopManager extends Component {
                 </Col>
                 <Col sm='6' className='text-center'>
 
-                    <Button type='submit' color="primary">Lưu thay đổi</Button> {" "}
+                    <Button onClick={this.handleSubmitButton} color="primary">Lưu thay đổi</Button> {" "}
                     <Button color="danger" onClick={this.handleCancelButton} >Hủy</Button>
                 </Col>
             </Row>
-        </Form> : '';
+            : '';
 
         return (
             <div>
