@@ -3,7 +3,7 @@ import './App.css';
 
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar';
-import  axios from "axios";
+import axios from "axios";
 import FooterPage from './components/FooterPage';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateShop from './Container/CreateShop';
@@ -21,27 +21,11 @@ class App extends Component {
     userData: null
   }
 
-    //kiem tra dang nhap sau khi mount
-    componentDidMount = () => {
-      axios.get(ROOT_API + "/auth/isLogin")
-        .then((response) => {
-          if(response.success==1){
-            getUserByIdFb(response.data.user)
-            .then(data => {
-              this.setState({ userData: response.data.user })
-            })
-            .catch(err => console.log(err))
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-    }
 
-    //khi  chua dang nhap ma dang nhap thi thay doi state user (did update: an login xong)
-  componentDidUpdate = () => {
-    if (!this.state.userData) {
-      axios.get(ROOT_API + "/auth/isLogin")
+
+  //kiem tra dang nhap sau khi mount
+  componentDidMount = () => {
+    axios.get(ROOT_API + "/auth/isLogin")
       .then((response) => {
         if(response.success==1){
           getUserByIdFb(response.data.user)
@@ -54,7 +38,23 @@ class App extends Component {
       .catch(function (error) {
         console.log(error);
       })
-    }
+  }
+
+  //khi  chua dang nhap ma dang nhap thi thay doi state user (did update: an login xong)
+  componentDidUpdate = () => {
+    axios.get(ROOT_API + "/auth/isLogin")
+      .then((response) => {
+        if(response.success==1){
+          getUserByIdFb(response.data.user)
+          .then(data => {
+            this.setState({ userData: response.data.user })
+          })
+          .catch(err => console.log(err))
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
   }
 
   modalShopIsOpen = () => {
@@ -63,6 +63,8 @@ class App extends Component {
     })
   }
 
+
+  //doan nay loi neu nguoi dung chuaw dang nhap trong navbar thi cac phan khac props.user=null
   _setData = (res) => {
     this.setState({
       userData: res[0]
@@ -71,6 +73,7 @@ class App extends Component {
   }
 
   render() {
+    console.log(this.state.userData)
     return (
       <BrowserRouter>
         <div id="main">
@@ -78,7 +81,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' component={home} />
             <Route exact path='/shop/:id' render={(props) => {
-              return <Shop {...props} />
+              return <Shop {...props} user={this.state.userData} />
             }} />
             <Route exact path='/shop/:id/manager' render={(props) => {
               return <ShopManager {...props} />
