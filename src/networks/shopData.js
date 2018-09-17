@@ -7,6 +7,7 @@ export const getShopById = (id) => {
 }
  
 export const createShop = ({title, description, owner}) => {
+    console.log({title, description, owner})
     return axios.post(`${ROOT_API}/shop`, {title, description, owner});
 }
 

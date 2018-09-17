@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from 'mdbreact';
 import { Row, Col } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import AddNewProductInShopManager from './AddNewProductInShopManager';
 
 class ProductInShopManager extends Component {
     render() {
@@ -10,7 +11,7 @@ class ProductInShopManager extends Component {
         const productLengthInShop = (this.props.productList) ? ('Bạn có ' + this.props.productList.length + ' sản phẩm trong cửa hàng') : '';
 
 
-        const addNewProductInShop = (this.props.productList) ? <Button outline color='danger'  size='lg' >Thêm sản phẩm mới</Button> : '';
+        const addNewProductInShop = (this.props.productList) ? <AddNewProductInShopManager /> : '';
 
         const listProductInShop = (this.props.productList) ?
             this.props.productList.map((product, index) => {

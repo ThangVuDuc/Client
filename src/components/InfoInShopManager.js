@@ -21,8 +21,6 @@ class InfoInShopManager extends Component {
 
     render() {
 
-        console.log(this.props.shopDataBo)
-
         const shopStatut = (this.props.shopDataBo.openOrClose) ? <Badge color='success' >Mở cửa</Badge> : <Badge color='danger' >Đóng cửa</Badge>;
 
         const isUpdateInfo = (!this.state.isUpdate && this.props.shopDataBo) ?
