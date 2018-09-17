@@ -21,7 +21,7 @@ class Facebook extends Component {
         axios.defaults.withCredentials = true;
         axios.get(`${ROOT_API}/auth/isLogin`)
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 if (response.data.success == 1) {
                     this.setState({ isLoggedIn: 1, userID: response.data.user })
                     this.getUser()
@@ -36,7 +36,7 @@ class Facebook extends Component {
         axios.defaults.withCredentials = true;
         axios.get(`${ROOT_API}/user/${this.state.userID}`)
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 if (response.data.success == 1) {
                     this.setState({ user: response.data.user })
                     this.props.setdata(response.data.user);
@@ -56,7 +56,7 @@ class Facebook extends Component {
             avatarUrl: this.state.picture
         })
             .then((response) => {
-                console.log(response)
+                // console.log(response)
                 this.checkLogin()
             })
             .catch(function (error) {
@@ -69,15 +69,15 @@ class Facebook extends Component {
         axios.defaults.withCredentials = true;
         axios.post(`${ROOT_API}/auth/logout`)
             .then((response) => {
-                console.log(response)
-                this.checkLogin()
+                // console.log(response)
+                window.location = "/";
             })
             .catch(function (error) {
                 console.log(error);
             })
     }
-    responseFacebook = response => {
-        console.log(response)
+    responseFacebook = response => { 
+        // console.log(response)
         if(response.userID) {
             // console.log("dm")
             this.setState({ userID: response.id, name: response.name, email: response.email, picture: response.picture.data.url })
@@ -103,7 +103,7 @@ class Facebook extends Component {
                 // onClick={this.login}
                 size='small'
                 textButton='Đăng nhập với Facebook'
-                cssClass= 'btn btn-primary'
+                cssClass= 'btn btn-primary LoginButton'
                 callback={this.responseFacebook} />
             );
         }

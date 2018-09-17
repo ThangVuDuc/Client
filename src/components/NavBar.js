@@ -23,7 +23,7 @@ class NavBar extends Component {
                                 <div className='input-group-prepend'>
                                     <button type='button' className='btn btn-secondary input-group-text'>Search</button>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
                         <LoginFace modalShopIsOpen={this.props.modalShopIsOpen} userData={this.props.userData} setdata={this.props.setdata} />
                         
