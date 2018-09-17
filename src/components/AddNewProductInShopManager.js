@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Button } from "mdbreact";
 import Base64 from 'react-file-base64';
 import { uploadFile } from "../networks/imgurData";
+import 'bootstrap/dist/css/bootstrap.min.css'
 
 class AddNewProductInShopManager extends Component {
 
@@ -27,7 +28,7 @@ class AddNewProductInShopManager extends Component {
         return (
             <div>
                 <Button outline color='danger' size ='lg' >Thêm sản phẩm mới</Button>
-                <Base64 multiple={false} onDone={this._getFile.bind(this)} />
+                <Base64 className='btn btn-success' multiple={false} onDone={this._getFile.bind(this)} />
             </div>
         );
     }
