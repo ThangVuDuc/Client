@@ -86,7 +86,6 @@ class AddNewProductInShopManager extends Component {
             })
             .catch(err => console.error(err))
 
-
     }
 
     render() {

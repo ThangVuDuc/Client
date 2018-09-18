@@ -11,7 +11,6 @@ export const getUserByIdFb = (id) => {
     return axios.get(`${ROOT_API}/user/${id}`);
 }
 
-
 export const updateUserById = (id, { name, email, avatarUrl, gender, shop, order }) => {
     return axios.put(`${ROOT_API}/user/${id}`, { name, email, avatarUrl, gender, shop, order });
 }
