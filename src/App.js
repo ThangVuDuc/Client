@@ -14,6 +14,7 @@ import Cart from './Container/Cart';
 import { ROOT_API } from "./static/index";
 import { getUserById,getUserByIdFb } from "./networks/userData.js"
 
+
 class App extends Component {
   state = {
     createShopModal: false,
@@ -26,6 +27,7 @@ class App extends Component {
       this.onRouteChanged();
     }
   }
+
 
   onRouteChanged() {
     console.log("ROUTE CHANGED");

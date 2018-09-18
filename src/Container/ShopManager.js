@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getShopById } from "../networks/shopData";
 import ProductInShopManager from '../components/ProductInShopManager';
