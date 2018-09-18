@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Col, Row, Form, ButtonGroup, InputGroup, InputGroupAddon, Input } from "reactstrap";
+import { Col, Row, ButtonGroup, InputGroup, InputGroupAddon, Input } from "reactstrap";
 import { Button } from "mdbreact";
 import { getShopById } from "../networks/shopData";
 import { updateInfoShopByID } from "../networks/shopData";
@@ -39,6 +39,7 @@ class UpdateInfoInShopManager extends Component {
         this.setState({
             shopData: data
         });
+        console.log(this.state.shopData)
     }
 
     handleCancelButton = () => {
@@ -51,7 +52,8 @@ class UpdateInfoInShopManager extends Component {
 
     handleSubmitButton = (e) => {
         e.preventDefault();
-        updateInfoShopByID(this.state.shopData)
+        console.log(this.state.shopData)
+        updateInfoShopByID(this.state.shopData.id, {title: this.state.shopData.title, description: this.state.shopData.description, openOrClose: this.state.shopData.openOrClose})
             .then(res => {
                 window.location.href = window.location.href
             })

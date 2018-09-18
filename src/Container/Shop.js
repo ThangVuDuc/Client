@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Banner from '../components/Banner'
-
+import ShopSlider from '../components/ShopSlider'
 import { ROOT_API } from "../static/index";
 import OrderListInShop from '../components/OrderListInShop';
 import { getProductById } from "../networks/productData"
@@ -13,6 +13,7 @@ import {
 } from 'react-router-dom'
 import { updateInfoShopByID } from "../networks/shopData"
 import { createSession, getSession } from "../networks/session"
+
 class Shop extends Component {
     constructor(props) {
         super(props);
