@@ -42,11 +42,17 @@ class OrderCache extends Component {
             let key = e.target.name.substring(e.target.name.length - 1, e.target.name.length);
             let data = this.state.orderCache;
             data.orderList[key].amount = e.target.value;
+            let tPrice = 0;
+            for (let i = 0; i < data.orderList.length; i++) {
+                tPrice += (data.orderList[i].amount * data.orderList[i].product.price);
+            }
             this.setState({
-                orderCache: data
-            })
+                orderCache: data,
+                totalPrice: tPrice
+                })
+            }
         }
-    }
+    
 
     render() {
         const listOrder = (this.state.orderCache && this.state.orderCache.orderList[0].product.shopID.title) ?

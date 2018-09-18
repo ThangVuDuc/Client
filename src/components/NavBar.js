@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import logo from '../img/logo.png';
-import Facebook from './LoginFace';
+import LoginFace from './LoginFace';
 import { Link } from "react-router-dom";
 
 class NavBar extends Component {
@@ -23,9 +23,10 @@ class NavBar extends Component {
                                 <div className='input-group-prepend'>
                                     <button type='button' className='btn btn-secondary input-group-text'>Search</button>
                                 </div>
-                            </div>
+                            </div> 
                         </div>
-                        <Facebook modalShopIsOpen={this.props.modalShopIsOpen} />
+                        <LoginFace modalShopIsOpen={this.props.modalShopIsOpen} userData={this.props.userData} setdata={this.props.setdata} />
+                        
 
                     </div>
                 </nav>

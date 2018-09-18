@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Container, Row, Col, Button } from "reactstrap";
+import { Container } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { getShopById } from "../networks/shopData";
 import ProductInShopManager from '../components/ProductInShopManager';
@@ -8,13 +8,15 @@ import InfoInShopManager from '../components/InfoInShopManager';
 
 class ShopManager extends Component {
     state = {
-        shopDataOng: null,
-        file: null
+        shopDataOng: null
     }
 
     componentDidMount() {
-        let id = '5b968b5be4150252f00b4986';
-        getShopById(id)
+        this.setState({
+            shopDataOng: null
+        })
+        console.log(this.props.match.params.id)
+        getShopById(this.props.match.params.id)
             .then(res => {
                 console.log(res.data)
                 this.setState({
@@ -42,7 +44,7 @@ class ShopManager extends Component {
                     <div className='shadow p-3 mb-5 bg-white rounded img-thumbnail' >
                         {showInfoShop}
                         <hr />
-                        <ProductInShopManager productList={(this.state.shopDataOng) ? this.state.shopDataOng.productList : null} />
+                        <ProductInShopManager shopData={this.state.shopDataOng} />
                     </div>
                 </Container>
             </div>

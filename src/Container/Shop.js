@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import Banner from '../components/Banner'
-
+import ShopSlider from '../components/ShopSlider'
 import { ROOT_API } from "../static/index";
+import OrderListInShop from '../components/OrderListInShop';
 
 import axios from 'axios'
 import Moment from 'react-moment';
@@ -10,18 +11,28 @@ import {
     Route,
     Link
 } from 'react-router-dom'
-import OrderListInShop from '../components/OrderListInShop';
+import { updateInfoShopByID } from "../networks/shopData"
 
 class Shop extends Component {
-    state = {
-        shop: "",
-        shops: [],
+    constructor(props) {
+        super(props);
+        this.state = {
+            shop: "",
+            shops: [],
+            user: null,
+        }
     }
+
     componentWillReceiveProps(nextProps) {
         if (this.props.match.params.id !== nextProps.match.params.id) {
             this.getData(nextProps.match.params.id);
+            window.scroll({
+                top: 0,
+                behavior: 'smooth'
+            });
         }
     }
+
     getData = (param) => {
         axios.get(ROOT_API + "/shop/" + param)
             .then((response) => {
@@ -38,21 +49,59 @@ class Shop extends Component {
                 console.log(error);
             })
     }
+    componentDidUpdate() {
+        if (this.state.user != this.props.user)
+            this.setState({ user: this.props.user })
+        document.getElementsByClassName("userInputCM")[0].value = ""
+    }
     componentDidMount() {
+        this.setState({ user: this.props.user })
+        window.scroll({
+            top: 0,
+            behavior: 'smooth'
+        })
         document.querySelector(".userInputCM").onfocus = function () {
             document.querySelector(".addComment").classList.add("show")
         }
-        // $(".userInputCM").on("focusout", function () {
-        //     $(".addComment").removeClass("show")
-        // })
+        document.querySelector(".userInputCM").onfocusout = function () {
+            document.querySelector(".addComment").classList.remove("show")
+        }
         this.getData(this.props.match.params.id)
 
     }
+    submitComment = (e) => {
+        e.preventDefault();
+        if (this.state.user&&document.getElementsByClassName("userInputCM")[0].value!="") {
+            this.setState({
+                modal: false
+            });
+            var commentsTemp = this.state.shop.comments
+            var newComment = {
+                owner: this.state.user,
+                content: document.getElementsByClassName("userInputCM")[0].value,
+            }
+            commentsTemp.push(newComment)
+
+            // console.log(this.state.shop)//state shop.comment tu dong thay doi
+            updateInfoShopByID(this.state.shop._id, { comments: this.state.shop.comments })
+                .then(data => {
+                    console.log(data)
+                })
+                .catch(err => console.log(err))
+        }
+        else if(!this.state.user) {
+            alert("Bạn chưa đăng nhập")
+            this.setState({
+                modal: true
+            });
+        }
+    }
     render() {
+        console.log(this.state.shop)
         var allProduct, slide, comments, related;
         if (this.state.shops) {
             related = this.state.shops.map((shop, index) => {
-                console.log(shop)
+                // console.log(shop)
                 if (index < 4)
                     return (
                         <Link to={"/shop/" + shop._id} key={shop._id} className="col-md-3">
@@ -72,7 +121,7 @@ class Shop extends Component {
 
             comments = this.state.shop.comments.map((comment, index) => {
                 return (
-                    <div className="oneComment row">
+                    <div key={index} className="oneComment row">
                         <div className="col-md-1">
                             <div className="avatarUserComment">
                                 <img src={comment.owner.avatarUrl} />
@@ -130,11 +179,10 @@ class Shop extends Component {
                                         </div>
                                     </div>
                                     <div className="mainStatus col-md-10">
-                                    {this.state.shop.owner ? <h3>{this.state.shop.title}</h3> : ""}
-                                        <h5>
+                                        <h4>
                                             {this.state.shop.owner ? <a >{this.state.shop.owner.name}</a> : ""}
-                                        </h5>
-                                        
+                                        </h4>
+                                        {this.state.shop.owner ? <h5>{this.state.shop.title}</h5> : ""}
                                         {this.state.shop.owner ? <p>{this.state.shop.description}</p> : ""}
                                         <div className="foodShop">
                                             {allProduct}
@@ -145,7 +193,7 @@ class Shop extends Component {
                                         </div>
                                         <div className="container containerSlide">
                                             <div className="slide">
-                                                <Banner />
+                                                {(this.state.shop) ? <ShopSlider productList={this.state.shop.productList} /> : ''}
                                             </div>
                                         </div>
                                     </div>
@@ -156,13 +204,15 @@ class Shop extends Component {
                                 <div className="oneComment  presentUserCM row">
                                     <div className="col-md-1 avatarUserCol">
                                         <div className="avatarUserComment avatarUser">
-                                            <img src="./images/2.jpg" />
+                                            <img src={this.state.user ? this.state.user.avatarUrl : ""} />
                                         </div>
                                     </div>
                                     <div className="col-md-11">
-                                        <textarea cols={30} rows={10} className="userInputCM" placeholder="Thêm bình luận" defaultValue={""} />
-                                        <div className="comment-arrow" />
-                                        <button className="addComment">Bình luận</button>
+                                        <form onSubmit={this.submitComment}>
+                                            <textarea cols={30} rows={10} className="userInputCM" placeholder="Thêm bình luận" defaultValue={""} />
+                                            <div className="comment-arrow" />
+                                            <input type="submit" className="addComment" value="Bình luận" />
+                                        </form>
                                     </div>
                                 </div>
                             </div>
@@ -173,7 +223,7 @@ class Shop extends Component {
                             <h5>BÀI VIẾT KHÁC</h5>
                             <div className="row">
                                 {related}
-                                
+
                             </div>
                         </div>
                     </div>

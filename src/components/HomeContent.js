@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios'
 import {
-  BrowserRouter as Router,
-  Route,
   Link
 } from 'react-router-dom'
 import {ROOT_API} from "../static/index"
@@ -16,7 +14,7 @@ class HomeContent extends Component {
   componentDidMount = () => {
     axios.get(`${ROOT_API}/shop`)
       .then((response) => {
-        console.log(response)
+        // console.log(response)
         this.setState({ shops: response.data.shopFound })
       })
       .catch(function (error) {

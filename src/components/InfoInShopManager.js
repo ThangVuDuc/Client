@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Form, ButtonGroup, InputGroup, InputGroupAddon, ModalFooter, Input } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import { Button, Badge } from "mdbreact";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpdateInfoInShopManager from './UpdateInfoInShopManager';
@@ -13,7 +13,7 @@ class InfoInShopManager extends Component {
 
 
     changeIsUpdate = () => {
-        console.log(this.props.shopDataBo.title);
+        console.log(this.props.shopDataBo);
         this.setState({
             isUpdate: !this.state.isUpdate
         })
@@ -24,6 +24,7 @@ class InfoInShopManager extends Component {
         const shopStatut = (this.props.shopDataBo.openOrClose) ? <Badge color='success' >Mở cửa</Badge> : <Badge color='danger' >Đóng cửa</Badge>;
 
         const isUpdateInfo = (!this.state.isUpdate && this.props.shopDataBo) ?
+        
             <Row>
                 <Col sm='12'>
                     <span><em>Cửa hàng của bạn:</em></span>
@@ -40,7 +41,7 @@ class InfoInShopManager extends Component {
                 <Col>
 
                 </Col>
-            </Row> : <UpdateInfoInShopManager shopDataCon={this.props.shopDataBo} changeIsUpdate={this.changeIsUpdate} />;
+            </Row> : <UpdateInfoInShopManager changeIsUpdate={this.changeIsUpdate} shopID={this.props.shopDataBo._id} />;
 
         return (
             <div>

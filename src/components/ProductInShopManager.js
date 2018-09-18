@@ -2,18 +2,19 @@ import React, { Component } from 'react';
 import { Button } from 'mdbreact';
 import { Row, Col } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
+import AddNewProductInShopManager from './AddNewProductInShopManager';
 
 class ProductInShopManager extends Component {
     render() {
 
 
-        const productLengthInShop = (this.props.productList) ? ('Bạn có ' + this.props.productList.length + ' sản phẩm trong cửa hàng') : '';
+        const productLengthInShop = (this.props.shopData) ? ('Bạn có ' + this.props.shopData.productList.length + ' sản phẩm trong cửa hàng') : '';
 
 
-        const addNewProductInShop = (this.props.productList) ? <Button outline color='danger'  size='lg' >Thêm sản phẩm mới</Button> : '';
+        const addNewProductInShop = (this.props.shopData) ? <AddNewProductInShopManager shopData={this.props.shopData} /> : '';
 
-        const listProductInShop = (this.props.productList) ?
-            this.props.productList.map((product, index) => {
+        const listProductInShop = (this.props.shopData) ?
+            this.props.shopData.productList.map((product, index) => {
                 return <Row key={'product' + index} className='mt-4' >
                     <Col lg='2' sm='3' >
                         <img src={product.image} className='img-fluid img-thumbnail' />
