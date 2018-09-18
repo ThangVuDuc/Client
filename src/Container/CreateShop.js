@@ -50,7 +50,6 @@ class CreateShop extends Component {
 
     render() {
         return (
-            <div className='banner'>
                 <Modal size='lg' isOpen={this.props.createShopModal} toggle={this.props.modalShopIsOpen} >
                     <Form onSubmit={this.handleSubmit}>
                         <Container>
@@ -88,7 +87,6 @@ class CreateShop extends Component {
                         </ModalFooter>
                     </Form>
                 </Modal>
-            </div>
         );
     }
 }
