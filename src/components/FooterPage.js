@@ -1,11 +1,13 @@
+
 import React from 'react';
 
-import { Row, Col } from "reactstrap";
+import {Container, Row, Col } from "reactstrap";
 import Slider from "react-slick";
-import 'bootstrap/dist/css/bootstrap.min.css';
-import Banner1 from '../img/Banner1.jpg';
-import Banner2 from '../img/Banner2.jpg';
-import Banner3 from '../img/Banner3.jpg';
+import 'bootstrap/dist/css/bootstrap.min.css'
+
+import Banner1 from '../img/Banner1 2.jpg';
+import Banner2 from '../img/Banner2 2.jpg';
+import Banner3 from '../img/Banner3 2.jpg';
 import Tan from '../img/Tan.jpg';
 import Thang from '../img/Thang.JPG';
 import Hoang from '../img/Hoang.jpg';
@@ -22,23 +24,23 @@ class FooterPage extends React.Component {
         };
         return (
             <div className="footer">
-                <Container-fluid>
-                    <Row className='mb-5' >
+                <Container fluid>
+                    <Row>
                         <Col>
-                            <Slider className='img-fluid' {...settings}>
+                            <Slider className='img-fluid mb-5' {...settings}>
                                 <div>
-                                    <img src={Banner1} className='img-fluid'  />
+                                    <img src={Banner1} className='img-fluid' />
                                 </div>
                                 <div>
-                                    <img src={Banner2} className='img-fluid'  />
+                                    <img src={Banner2} className='img-fluid' />
                                 </div>
                                 <div>
-                                    <img src={Banner3} className='img-fluid'  />
+                                    <img src={Banner3} className='img-fluid' />
                                 </div>
                             </Slider>
                         </Col>
                     </Row>
-                </Container-fluid>
+                </Container>
                 <div className="container text-center">
                     <h2>HOLA FOOD</h2>
                     <h3>We love food!</h3>

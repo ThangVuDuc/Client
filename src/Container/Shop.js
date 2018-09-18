@@ -3,7 +3,7 @@ import Banner from '../components/Banner'
 import ShopSlider from '../components/ShopSlider'
 import { ROOT_API } from "../static/index";
 import OrderListInShop from '../components/OrderListInShop';
-
+import { getProductById } from "../networks/productData"
 import axios from 'axios'
 import Moment from 'react-moment';
 import {
@@ -12,6 +12,7 @@ import {
     Link
 } from 'react-router-dom'
 import { updateInfoShopByID } from "../networks/shopData"
+import { createSession, getSession } from "../networks/session"
 
 class Shop extends Component {
     constructor(props) {
@@ -20,7 +21,10 @@ class Shop extends Component {
             shop: "",
             shops: [],
             user: null,
+            productImg: []
         }
+        this.comment = React.createRef()
+        this.inputCM = React.createRef()
     }
 
     componentWillReceiveProps(nextProps) {
@@ -63,15 +67,76 @@ class Shop extends Component {
         document.querySelector(".userInputCM").onfocus = function () {
             document.querySelector(".addComment").classList.add("show")
         }
-        document.querySelector(".userInputCM").onfocusout = function () {
+        document.querySelector(".userInputCM").onblur = function () {
             document.querySelector(".addComment").classList.remove("show")
         }
         this.getData(this.props.match.params.id)
 
     }
+    moveToInputCM = () => {
+        window.scroll({
+            top: this.inputCM.current.offsetTop + 80,
+            behavior: 'smooth'
+        })
+        this.inputCM.current.focus()
+    }
+    pushProductToCart = (e) => {
+
+        if (!this.state.user) {
+            alert("Bạn chưa đăng nhập")
+            e.target.value = 0
+        } else {
+            var name = e.target.name;
+            var amount=e.target.value;
+            //lay session ve truoc de kiem tra orderList
+            getSession()
+                .then(data => {
+                    // console.log(data.data.session)
+                    var orderListTemp = data.data.session.order ? data.data.session.order.orderList : []
+                    // console.log(orderListTemp)
+                    getProductById(name)//lay san pham duoc chon
+                        .then(data => {
+
+                            var duplicatePro = orderListTemp.filter(x => x.id == data.data.productFound._id)
+                            if (duplicatePro[0]) {
+                                 var index=orderListTemp.findIndex(x => x.id == data.data.productFound._id)
+                                if (index > -1) {
+                                    orderListTemp.splice(index, 1);
+                                }
+                                orderListTemp.push({
+                                    id: data.data.productFound._id,
+                                    shopID: {
+                                        _id: data.data.productFound.shopID._id
+                                    },
+                                    name: data.data.productFound.name,
+                                    image: data.data.productFound.image,
+                                    price: data.data.productFound.price,
+                                    amount: amount
+                                })
+                            }
+                            else {
+                                orderListTemp.push({
+                                    id: data.data.productFound._id,
+                                    shopID: {
+                                        _id: data.data.productFound.shopID._id
+                                    },
+                                    name: data.data.productFound.name,
+                                    image: data.data.productFound.image,
+                                    price: data.data.productFound.price,
+                                    amount: 1
+                                })
+                            }
+                            createSession({ owner: this.state.user._id, orderList: orderListTemp })
+                                .then(data => console.log(data.data))
+                                .catch(err => console.log(err))
+                        })
+                })
+                .catch(err => console.log(err))
+        }
+    }
     submitComment = (e) => {
         e.preventDefault();
-        if (this.state.user&&document.getElementsByClassName("userInputCM")[0].value!="") {
+        if (this.state.user && document.getElementsByClassName("userInputCM")[0].value != "") {
             this.setState({
                 modal: false
             });
@@ -89,7 +154,7 @@ class Shop extends Component {
                 })
                 .catch(err => console.log(err))
         }
-        else if(!this.state.user) {
+        else if (!this.state.user) {
             alert("Bạn chưa đăng nhập")
             this.setState({
                 modal: true
@@ -97,7 +162,6 @@ class Shop extends Component {
         }
     }
     render() {
-        console.log(this.state.shop)
         var allProduct, slide, comments, related;
         if (this.state.shops) {
             related = this.state.shops.map((shop, index) => {
@@ -135,35 +199,24 @@ class Shop extends Component {
                     </div>
                 )
             })
-            slide = this.state.shop.productList.map((product, index) => {
-                return (
-                    <div>
-                        <div className="imgSlide" style={{ backgroundImage: 'url(' + product.image + ')' }}>
-                            <i className="fas fa-heart" />
-                        </div>
-                    </div>
-                )
-            })
+            var tempProductImg = []
             allProduct = this.state.shop.productList.map((product, index) => {
+                tempProductImg.push(product.image)
                 return (
                     <div key={index} className={"oneFood " + "food" + index + " mb-3"}>
                         <div className="foodImg">
                             <img src={product.image} />
                         </div>
                         <div className="foodName">{product.name}</div>
-                        <div className="minusFood">
-                            <i className="fas fa-minus-square" name={index} />
-                        </div>
-                        <div className="quantity">0</div>
-                        <div className="addFood">
-                            <i className="fas fa-plus-square" name={index} />
-                        </div>
+                        <input type="number" name={product._id} onChange={this.pushProductToCart} defaultValue={0} min={0} max={100} className="slsp" />
                         <div className="foodPrice">{product.price}</div>
                     </div>
                 )
             })
         }
+        // console.log(tempProductImg)
         return (
+
             <div>
                 <div className="container-fluid details pb-3 pt-3">
                     <div className="container detailsStatus mt-3">
@@ -176,6 +229,7 @@ class Shop extends Component {
                                         </div>
                                         <div className="cart mt-3">
                                             {(this.state.shop) ? <OrderListInShop orderData={this.state.shop.listOrder} /> : ''}
+                                            <h6 className="mt-2">Ordered in shop</h6>
                                         </div>
                                     </div>
                                     <div className="mainStatus col-md-10">
@@ -189,11 +243,11 @@ class Shop extends Component {
                                         </div>
                                         <div className="expressBar mt-3">
                                             <i className="far fa-heart" />
-                                            <i className="far fa-comment" />
+                                            <i className="far fa-comment" ref={this.comment} onClick={this.moveToInputCM} />
                                         </div>
                                         <div className="container containerSlide">
                                             <div className="slide">
-                                                {(this.state.shop) ? <ShopSlider productList={this.state.shop.productList} /> : ''}
+                                                {tempProductImg ? <Banner img={tempProductImg} /> : ""}
                                             </div>
                                         </div>
                                     </div>
@@ -209,9 +263,9 @@ class Shop extends Component {
                                     </div>
                                     <div className="col-md-11">
                                         <form onSubmit={this.submitComment}>
-                                            <textarea cols={30} rows={10} className="userInputCM" placeholder="Thêm bình luận" defaultValue={""} />
+                                            <input type="text" cols={30} rows={6} className="userInputCM" ref={this.inputCM} placeholder="Thêm bình luận" defaultValue={""} />
                                             <div className="comment-arrow" />
-                                            <input type="submit" className="addComment" value="Bình luận" />
+                                            <input style={{ marginTop: 20 }} type="submit" className="addComment" value="Bình luận" />
                                         </form>
                                     </div>
                                 </div>

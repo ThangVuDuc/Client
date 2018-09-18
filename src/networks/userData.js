@@ -3,8 +3,7 @@ import { ROOT_API } from "../static/index";;
 
 
 export const getUserById = (id) => {
-    console.log(id)
-    return axios.get(`${ROOT_API}/user/info/${id}`);
+    return axios.get(`${ROOT_API}/user/?userId=${id}`);
 }
 
 export const getUserByIdFb = (id) => {

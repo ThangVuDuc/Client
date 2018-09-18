@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
-import pic1 from '../img/pic1.png';
-import pic2 from '../img/pic2.png';
-import pic3 from '../img/pic3.png';
+import pic1 from '../img/banner1.jpg';
+import pic2 from '../img/banner2.jpg';
+import pic3 from '../img/banner3.jpg';
 import { Container, Row, Col } from "reactstrap";
 
 import Slider from "react-slick";
@@ -10,28 +10,28 @@ class Banner extends Component {
   render() {
     const settings = {
       fade: true,
-      pauseOnHover: true,
       dots: true,
       infinite: true,
       slidesToShow: 1,
       slidesToScroll: 1,
-      arrows: false
+      autoplay: true,
+      autoplaySpeed: 2000,
     };
+    var slide;
+    slide = this.props.img.map((img, index) => {
+      return (
+        <div key={index}>
+          <img src={img} />
+        </div>
+      )
+    })
     return (
       <div className="banner">
-        <Container>
+        <Container fluid>
           <Row>
             <Col>
               <Slider className='fixed' {...settings}>
-                <div>
-                  <img src={pic1} />
-                </div>
-                <div>
-                  <img src={pic2} />
-                </div>
-                <div>
-                  <img src={pic3} />
-                </div>
+                {slide}
               </Slider>
             </Col>
           </Row>
