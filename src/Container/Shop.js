@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Banner from '../components/Banner'
-
+import ShopSlider from '../components/ShopSlider'
 import { ROOT_API } from "../static/index";
 import OrderListInShop from '../components/OrderListInShop';
 
@@ -12,6 +12,7 @@ import {
     Link
 } from 'react-router-dom'
 import { updateInfoShopByID } from "../networks/shopData"
+
 class Shop extends Component {
     constructor(props) {
         super(props);
@@ -85,7 +86,6 @@ class Shop extends Component {
             updateInfoShopByID(this.state.shop._id, { comments: this.state.shop.comments })
                 .then(data => {
                     console.log(data)
-                    this.setState({ shop: data.data.shopUpdated })
                 })
                 .catch(err => console.log(err))
         }
@@ -193,7 +193,7 @@ class Shop extends Component {
                                         </div>
                                         <div className="container containerSlide">
                                             <div className="slide">
-                                                <Banner />
+                                                {(this.state.shop) ? <ShopSlider productList={this.state.shop.productList} /> : ''}
                                             </div>
                                         </div>
                                     </div>

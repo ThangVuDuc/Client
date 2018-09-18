@@ -13,6 +13,7 @@ import Shop from './Container/Shop';
 import Cart from './Container/Cart';
 import { ROOT_API } from "./static/index";
 import { getUserById,getUserByIdFb } from "./networks/userData.js"
+import Profile from './Container/Profile';
 
 
 class App extends Component {
@@ -88,6 +89,9 @@ class App extends Component {
             }} />
             <Route exact path='/cart' render={(props) => {
               return <Cart {...props} />
+            }} />
+            <Route exact path='/user/:id' render={(props) => {
+              return <Profile {...props}  user={this.state.userData} />
             }} />
           </Switch>
           <CreateShop createShopModal={this.state.createShopModal} modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} />

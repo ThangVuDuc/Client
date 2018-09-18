@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Col, Row, Form, ButtonGroup, InputGroup, InputGroupAddon, ModalFooter, Input } from "reactstrap";
+import { Col, Row } from "reactstrap";
 import { Button, Badge } from "mdbreact";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpdateInfoInShopManager from './UpdateInfoInShopManager';

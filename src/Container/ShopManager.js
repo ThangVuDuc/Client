@@ -44,7 +44,7 @@ class ShopManager extends Component {
                     <div className='shadow p-3 mb-5 bg-white rounded img-thumbnail' >
                         {showInfoShop}
                         <hr />
-                        <ProductInShopManager productList={(this.state.shopDataOng) ? this.state.shopDataOng.productList : null} />
+                        <ProductInShopManager shopData={this.state.shopDataOng} />
                     </div>
                 </Container>
             </div>
