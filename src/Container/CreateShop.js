@@ -36,8 +36,8 @@ class CreateShop extends Component {
                 updateUserById(this.props.userData._id, { shop: res.data.shopCreated._id })
                     .then(save => {
                         console.log(save.data)
-                        // this.props.modalShopIsOpen();
-                        // window.location.href = `/shop/${res.data.shopCreated._id}/manager`;
+                        this.props.modalShopIsOpen();
+                        window.location.href = `/shop/${res.data.shopCreated._id}/manager`;
                     })
 
             })

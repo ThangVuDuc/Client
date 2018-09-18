@@ -43,7 +43,7 @@ class ShopManager extends Component {
         const showInfoShop = (this.state.shopDataOng) ? <InfoInShopManager shopDataBo={this.state.shopDataOng} UpdateInfo={this.UpdateInfo} /> : '';
 
         return (
-            <div className='banner' style={{marginTop: 100}}>
+            <div style={{marginTop: 100}}>
                 <Container>
                     <div className='shadow p-3 mb-5 bg-white rounded img-thumbnail' >
                         {showInfoShop}

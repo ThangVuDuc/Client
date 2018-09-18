@@ -81,11 +81,11 @@ class AddNewProductInShopManager extends Component {
                 })
                 updateInfoShopByID(this.state.shopData._id, { productList: this.state.shopData.productList })
                     .then(data => {
+                        this._handleIsAddNew();
                         console.log(data)
                     })
             })
             .catch(err => console.error(err))
-            this._handleIsAddNew();
 
     }
 
