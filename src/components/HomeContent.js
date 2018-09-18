@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
 import axios from 'axios'
-import {
-  Link
-} from 'react-router-dom'
-import {ROOT_API} from "../static/index"
 
+import { ROOT_API } from "../static/index"
+import OneShopDiv from "./OneShopDiv"
 class HomeContent extends Component {
 
   state = {
-    shops: []
+    shops: [],
+    user: null
   }
 
   componentDidMount = () => {
@@ -21,25 +20,30 @@ class HomeContent extends Component {
         console.log(error);
       })
   }
- 
+  componentDidUpdate() {
+    if (!this.state.user&&this.props.user) {
+      this.setState({ user: this.props.user })
+      console.log( this.state.user);
+    }
+  }
+
   render() {
     var allShops
-    if(this.state.shops){
-      allShops=this.state.shops.map(shop => {
+    console.log( this.state.user);
+    if (this.state.shops) {
+      allShops = this.state.shops.map(shop => {
         // console.log(shop)
+        if (this.state.user) {
+          if(shop.owner._id==this.state.user._id){
+            return (
+              <OneShopDiv key={shop._id} shop={shop} link={shop._id+"/manager"} />
+            )
+          }
+        }
         return (
-          <Link to={"/shop/" + shop._id} key={shop._id} className="col-lg-4 col-sm-6 portfolio-item mb-3">
-            <div className="card h-100">
-            {shop.productList[0] ? <img className="card-img-top" src={shop.productList[0].image} alt="" /> : ""}
-              <div className="card-body">
-                <h4 className="card-title">
-                  <div>{shop.title}</div>
-                </h4>
-                <p className="card-text">{shop.description}</p>
-              </div>
-            </div>
-          </Link>
-        )})
+          <OneShopDiv key={shop._id} shop={shop} link={shop._id} />
+        )
+      })
     }
     return (
       <div className="container mt-3">

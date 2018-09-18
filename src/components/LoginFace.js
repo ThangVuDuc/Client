@@ -11,12 +11,14 @@ class Facebook extends Component {
         name: '',
         email: '',
         picture: '',
-        user: ""
+        user: "",
+        isUpdate:false
     }
     componentDidMount = () => {
         this.checkLogin();
     }
-
+    
+    
     checkLogin = () => {
         axios.defaults.withCredentials = true;
         axios.get(`${ROOT_API}/auth/isLogin`)

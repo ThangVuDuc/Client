@@ -8,7 +8,7 @@ import FooterPage from './components/FooterPage';
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 import CreateShop from './Container/CreateShop';
 import ShopManager from './Container/ShopManager';
-import home from './components/Home';
+import Home from './components/Home';
 import Shop from './Container/Shop';
 import Cart from './Container/Cart';
 import { ROOT_API } from "./static/index";
@@ -19,11 +19,20 @@ import Profile from './Container/Profile';
 class App extends Component {
   state = {
     createShopModal: false,
-    userData: null
+    userData: null,
+    isUpdate:false
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.location !== prevProps.location) {
+      this.onRouteChanged();
+    }
   }
 
 
-
+  onRouteChanged() {
+    console.log("ROUTE CHANGED");
+  }
   //kiem tra dang nhap sau khi mount
   componentDidMount = () => {
     axios.get(ROOT_API + "/auth/isLogin")
@@ -35,15 +44,28 @@ class App extends Component {
           })
           .catch(err => console.log(err))
         }
+        else{
+          this.setState({ userData: null })
+        }
       })
       .catch(function (error) {
         console.log(error);
       })
+      window.addEventListener("scroll",function(){
+        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+          document.getElementsByClassName("header")[0].classList.add("headerBg")
+        } else {
+          document.getElementsByClassName("header")[0].classList.remove("headerBg");
+        }
+      })
+      
   }
 
   //khi  chua dang nhap ma dang nhap thi thay doi state user (did update: an login xong)
   componentDidUpdate = () => {
-    axios.get(ROOT_API + "/auth/isLogin")
+    if(!this.state.isUpdate){
+      this.setState({isUpdate:true})
+      axios.get(ROOT_API + "/auth/isLogin")
       .then((response) => {
         if(response.success==1){
           getUserByIdFb(response.data.user)
@@ -52,10 +74,15 @@ class App extends Component {
           })
           .catch(err => console.log(err))
         }
+        else{
+          this.setState({ userData: null })
+        }
       })
       .catch(function (error) {
         console.log(error);
       })
+    }
+   
   }
 
   modalShopIsOpen = () => {
@@ -74,13 +101,15 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.userData)
     return (
       <BrowserRouter>
         <div id="main">
-          <NavBar modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} setdata={this._setData} />
+          <NavBar  modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} setdata={this._setData} />
           <Switch>
-            <Route exact path='/' component={home} />
+            <Route exact path='/' render={(props) => {
+              console.log(this.state.userData)
+              return <Home {...props} user={this.state.userData} />
+            }} />
             <Route exact path='/shop/:id' render={(props) => {
               return <Shop {...props} user={this.state.userData} />
             }} />
@@ -88,7 +117,7 @@ class App extends Component {
               return <ShopManager {...props} />
             }} />
             <Route exact path='/cart' render={(props) => {
-              return <Cart {...props} />
+              return <Cart {...props} user={this.state.userData} />
             }} />
             <Route exact path='/user/:id' render={(props) => {
               return <Profile {...props}  user={this.state.userData} />
