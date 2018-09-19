@@ -22,7 +22,7 @@ class App extends Component {
   state = {
     createShopModal: false,
     userData: null,
-    isUpdate:false
+    isUpdate: false
   }
 
   componentDidUpdate(prevProps) {
@@ -39,52 +39,52 @@ class App extends Component {
   componentDidMount = () => {
     axios.get(ROOT_API + "/auth/isLogin")
       .then((response) => {
-        if(response.success=== 1){
+        if (response.success === 1) {
           getUserByIdFb(response.data.user)
-          .then(data => {
-            this.setState({ userData: response.data.user })
-          })
-          .catch(err => console.log(err))
+            .then(data => {
+              this.setState({ userData: response.data.user })
+            })
+            .catch(err => console.log(err))
         }
-        else{
+        else {
           this.setState({ userData: null })
         }
       })
       .catch(function (error) {
         console.log(error);
       })
-      window.addEventListener("scroll",function(){
-        if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-          document.getElementsByClassName("header")[0].classList.add("headerBg")
-        } else {
-          document.getElementsByClassName("header")[0].classList.remove("headerBg");
-        }
-      })
-      
+    window.addEventListener("scroll", function () {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementsByClassName("header")[0].classList.add("headerBg")
+      } else {
+        document.getElementsByClassName("header")[0].classList.remove("headerBg");
+      }
+    })
+
   }
 
   //khi  chua dang nhap ma dang nhap thi thay doi state user (did update: an login xong)
   componentDidUpdate = () => {
-    if(!this.state.isUpdate){
-      this.setState({isUpdate:true})
+    if (!this.state.isUpdate) {
+      this.setState({ isUpdate: true })
       axios.get(ROOT_API + "/auth/isLogin")
-      .then((response) => {
-        if(response.success===1){
-          getUserByIdFb(response.data.user)
-          .then(data => {
-            this.setState({ userData: response.data.user })
-          })
-          .catch(err => console.log(err))
-        }
-        else{
-          this.setState({ userData: null })
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+        .then((response) => {
+          if (response.success === 1) {
+            getUserByIdFb(response.data.user)
+              .then(data => {
+                this.setState({ userData: response.data.user })
+              })
+              .catch(err => console.log(err))
+          }
+          else {
+            this.setState({ userData: null })
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
     }
-   
+
   }
 
   modalShopIsOpen = () => {
@@ -106,7 +106,7 @@ class App extends Component {
     return (
       <BrowserRouter>
         <div id="main">
-          <NavBar  modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} setdata={this._setData} />
+          <NavBar modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} setdata={this._setData} />
           <Switch>
             <Route exact path='/' render={(props) => {
               console.log(this.state.userData)
@@ -122,7 +122,7 @@ class App extends Component {
               return <Cart {...props} user={this.state.userData} />
             }} />
             <Route exact path='/user/:id' render={(props) => {
-              return <Profile {...props}  user={this.state.userData} />
+              return <Profile {...props} user={this.state.userData} />
             }} />
           </Switch>
           <CreateShop createShopModal={this.state.createShopModal} modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} />
