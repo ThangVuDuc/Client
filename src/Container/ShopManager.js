@@ -29,18 +29,18 @@ class ShopManager extends Component {
             })
     }
 
-    UpdateInfo = (updateData) => {
+    _handleUpdateData = (updateData) => {
 
-        // this.setState({
-        //     shopData: updateData
-        // })
+        this.setState({
+            shopDataOng: updateData
+        })
         console.log(updateData);
         
     }
 
     render() {
 
-        const showInfoShop = (this.state.shopDataOng) ? <InfoInShopManager shopDataBo={this.state.shopDataOng} UpdateInfo={this.UpdateInfo} /> : '';
+        const showInfoShop = (this.state.shopDataOng) ? <InfoInShopManager shopDataBo={this.state.shopDataOng} UpdateInfo={this._handleUpdateData} /> : '';
 
         return (
             <div style={{marginTop: 100}}>
@@ -48,7 +48,7 @@ class ShopManager extends Component {
                     <div className='shadow p-3 mb-5 bg-white rounded img-thumbnail' >
                         {showInfoShop}
                         <hr />
-                        <ProductInShopManager shopData={this.state.shopDataOng} />
+                        <ProductInShopManager shopData={this.state.shopDataOng} handleUpdateData={this._handleUpdateData}  />
                     </div>
                 </Container>
             </div>

@@ -4,23 +4,28 @@ import ProfileSidebar from '../components/ProfileSidebar'
 import ProfileContent from '../components/ProfileContent';
 import OrderHistory from '../components/OrderHistory';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { getUserById } from "../networks/userData";
+import { getInfoUserById } from "../networks/userData";
 class Profile extends Component {
 
     state = {
+        userData: null
     }
 
     componentDidMount() {
-        getUserById("5b9d191df7b8a613d1d6fd7f")
-            .then( user => console.log(user))
+        getInfoUserById("5b9d191df7b8a613d1d6fd7f")
+            .then( user => {
+                this.setState({
+                    userData: user.data.user
+                })
+            })
     }
 
     render() {
         return (
             <Container bootstrap snippet >
-                <Row>
+                <Row className='img-thumbnail shadow p-3 mb-5 bg-white rounded mt-50 bg-light'>
                     <Col sm='3' className='text-center'>
-                        <img src />
+                       {(this.state.userData) ?  <ProfileContent userData={this.state.userData} /> : ''}
                     </Col>
                 </Row>
             </Container>

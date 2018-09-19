@@ -11,7 +11,7 @@ class ProductInShopManager extends Component {
         const productLengthInShop = (this.props.shopData) ? ('Bạn có ' + this.props.shopData.productList.length + ' sản phẩm trong cửa hàng') : '';
 
 
-        const addNewProductInShop = (this.props.shopData) ? <AddNewProductInShopManager shopData={this.props.shopData} /> : '';
+        const addNewProductInShop = (this.props.shopData) ? <AddNewProductInShopManager shopData={this.props.shopData} handleUpdateData={this.props.handleUpdateData} /> : '';
 
         const listProductInShop = (this.props.shopData) ?
             this.props.shopData.productList.map((product, index) => {
