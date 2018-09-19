@@ -19,6 +19,7 @@ class Cart extends Component {
     componentDidUpdate() {
         if (this.state.user != this.props.user)
             this.setState({ user: this.props.user })
+            console.log(this.state.user)
         // if (this.state.isUpdate) {
         //     getSession()
         //         .then(data => {
@@ -59,7 +60,6 @@ class Cart extends Component {
                 console.log(data.data.session)
                 var sessionTemp = data.data.session
                 //luu vao order tiep
-
                 createOrder({ owner: this.state.user._id, address: sessionTemp.order.address, phoneNumber: sessionTemp.order.phoneNumber, orderList: sessionTemp.order.orderList })
                     .then(data => {
                         console.log(data)
@@ -76,9 +76,12 @@ class Cart extends Component {
                                     .catch(err => console.log(err))
                             })
 
+                        
+
                     })
 
                 //luu vao shop.order
+
             })
             .catch(err => console.log(err))
         }
