@@ -76,17 +76,18 @@ class AddNewProductInShopManager extends Component {
             .then(res => {
                 let data = this.state.shopData;
                 data.productList.push(res.data.productCreated);
+                this.props.handleUpdateData(data);
+                this._handleIsAddNew();
                 this.setState({
                     shopData: data
                 })
                 updateInfoShopByID(this.state.shopData._id, { productList: this.state.shopData.productList })
                     .then(data => {
-                        this._handleIsAddNew();
+                        
                         console.log(data)
                     })
             })
             .catch(err => console.error(err))
-
     }
 
     render() {
