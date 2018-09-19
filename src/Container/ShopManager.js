@@ -19,7 +19,6 @@ class ShopManager extends Component {
         this.setState({
             shopDataOng: null
         })
-        console.log(this.props.match.params.id)
         getShopById(this.props.match.params.id)
             .then(res => {
                 console.log(res.data)
@@ -29,11 +28,15 @@ class ShopManager extends Component {
             })
     }
 
+    _checkFbData = () => {
+        console.log()
+    }
+
     UpdateInfo = (updateData) => {
 
-        // this.setState({
-        //     shopData: updateData
-        // })
+        this.setState({
+            shopData: updateData
+        })
         console.log(updateData);
         
     }
@@ -42,13 +45,15 @@ class ShopManager extends Component {
 
         const showInfoShop = (this.state.shopDataOng) ? <InfoInShopManager shopDataBo={this.state.shopDataOng} UpdateInfo={this.UpdateInfo} /> : '';
 
+        const checkFbId = (this.props.userData) ? () => {} : '';
+
         return (
             <div style={{marginTop: 100}}>
                 <Container>
                     <div className='shadow p-3 mb-5 bg-white rounded img-thumbnail' >
                         {showInfoShop}
                         <hr />
-                        <ProductInShopManager shopData={this.state.shopDataOng} />
+                        <ProductInShopManager shopData={this.state.shopDataOng} UpdateInfo={this.UpdateInfo} />
                     </div>
                 </Container>
             </div>

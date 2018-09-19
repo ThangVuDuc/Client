@@ -81,6 +81,7 @@ class AddNewProductInShopManager extends Component {
                 })
                 updateInfoShopByID(this.state.shopData._id, { productList: this.state.shopData.productList })
                     .then(data => {
+                        this.props.UpdateInfo();
                         this._handleIsAddNew();
                         console.log(data)
                     })

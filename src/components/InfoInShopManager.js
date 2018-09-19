@@ -3,6 +3,7 @@ import { Col, Row } from "reactstrap";
 import { Button, Badge } from "mdbreact";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpdateInfoInShopManager from './UpdateInfoInShopManager';
+import OrderListInShop from './OrderListInShop';
 
 
 class InfoInShopManager extends Component {
@@ -24,7 +25,7 @@ class InfoInShopManager extends Component {
         const shopStatut = (this.props.shopDataBo.openOrClose) ? <Badge color='success' >Mở cửa</Badge> : <Badge color='danger' >Đóng cửa</Badge>;
 
         const isUpdateInfo = (!this.state.isUpdate && this.props.shopDataBo) ?
-        
+
             <Row>
                 <Col sm='12'>
                     <span><em>Cửa hàng của bạn:</em></span>
@@ -37,6 +38,10 @@ class InfoInShopManager extends Component {
                 </Col>
                 <Col sm='12' lg='3' className='text-right' >
                     <Button size='sm' color='secondary' onClick={this.changeIsUpdate} outline >Thay đổi thông tin cửa hàng</Button>
+                    <div className="cart mt-3 text-center">
+                        <OrderListInShop orderData={this.props.shopDataBo.listOrder} />
+                        <h6 className="mt-2">Danh Sách Ordered</h6>
+                    </div>
                 </Col>
                 <Col>
 
