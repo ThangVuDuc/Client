@@ -26,6 +26,9 @@ class Profile extends Component {
                     <Col sm='3' className='text-center'>
                        {(this.state.userData) ?  <ProfileContent userData={this.state.userData} /> : ''}
                     </Col>
+                    <Col sm='9'>
+                        {(this.state.userData) ?  <ProfileSidebar userData={this.state.userData} /> : ''}
+                    </Col>
                 </Row>
             </Container>
         );
