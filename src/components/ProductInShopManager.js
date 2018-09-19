@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { Button } from 'mdbreact';
 import { Row, Col } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import AddNewProductInShopManager from './AddNewProductInShopManager';

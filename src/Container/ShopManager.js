@@ -45,7 +45,7 @@ class ShopManager extends Component {
 
         const showInfoShop = (this.state.shopDataOng) ? <InfoInShopManager shopDataBo={this.state.shopDataOng} UpdateInfo={this.UpdateInfo} /> : '';
 
-        const checkFbId = (this.props.userData) ? () => {} : '';
+        
 
         return (
             <div style={{marginTop: 100}}>

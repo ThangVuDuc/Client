@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { updateInfoShopByID } from "../networks/shopData"
 import { createSession, getSession } from "../networks/session"
 import { getProductById } from "../networks/productData"
 class Cart extends Component {
@@ -13,7 +12,7 @@ class Cart extends Component {
         }
     }
     componentDidUpdate() {
-        if (this.state.user != this.props.user)
+        if (this.state.user !== this.props.user)
             this.setState({ user: this.props.user })
         // if (this.state.isUpdate) {
         //     getSession()
@@ -45,9 +44,9 @@ class Cart extends Component {
                 getProductById(name)//lay san pham duoc chon
                     .then(data => {
 
-                        var duplicatePro = orderListTemp.filter(x => x.id == data.data.productFound._id)
+                        var duplicatePro = orderListTemp.filter(x => x.id === data.data.productFound._id)
                         if (duplicatePro[0]) {
-                            var index = orderListTemp.findIndex(x => x.id == data.data.productFound._id)
+                            var index = orderListTemp.findIndex(x => x.id === data.data.productFound._id)
                             if (index > -1) {
                                 orderListTemp[index]={
                                     id: data.data.productFound._id,

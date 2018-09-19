@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { Container, Row, Col,} from "reactstrap"
 import ProfileSidebar from '../components/ProfileSidebar'
 import ProfileContent from '../components/ProfileContent';
-import OrderHistory from '../components/OrderHistory';
 import { getInfoUserById } from "../networks/userData";
 class Profile extends Component {
 

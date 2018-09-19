@@ -34,7 +34,7 @@ class HomeContent extends Component {
       allShops = this.state.shops.map(shop => {
         // console.log(shop)
         if (this.state.user) {
-          if(shop.owner._id==this.state.user._id){
+          if(shop.owner._id===this.state.user._id){
             return (
               <OneShopDiv key={shop._id} shop={shop} link={shop._id+"/manager"} />
             )

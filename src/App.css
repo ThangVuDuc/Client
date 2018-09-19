@@ -565,3 +565,24 @@ transition: .3s;
 .mdbColorLighten5 {
     background-color: #d0d6e2
 }
+
+.femalegendercolor {
+    color: rgb(240, 98, 146)
+}
+
+.malegendercolor {
+    color: rgb(22, 101, 192)
+}
+
+.mailcolor {
+    color: rgb(249, 168, 37);
+}
+
+.productinshop:hover {
+    text-decoration-line:  none;
+    
+}
+
+.productinshop {
+    text-decoration-color: black;
+}

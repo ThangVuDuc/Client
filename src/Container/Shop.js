@@ -1,14 +1,11 @@
 import React, { Component } from 'react';
 import Banner from '../components/Banner'
-import ShopSlider from '../components/ShopSlider'
 import { ROOT_API } from "../static/index";
 import OrderListInShop from '../components/OrderListInShop';
 import { getProductById } from "../networks/productData"
 import axios from 'axios'
 import Moment from 'react-moment';
 import {
-    BrowserRouter as Router,
-    Route,
     Link
 } from 'react-router-dom'
 import { updateInfoShopByID } from "../networks/shopData"
@@ -54,7 +51,7 @@ class Shop extends Component {
             })
     }
     componentDidUpdate() {
-        if (this.state.user != this.props.user)
+        if (this.state.user !== this.props.user)
             this.setState({ user: this.props.user })
         document.getElementsByClassName("userInputCM")[0].value = ""
     }
@@ -97,9 +94,9 @@ class Shop extends Component {
                     getProductById(name)//lay san pham duoc chon
                         .then(data => {
 
-                            var duplicatePro = orderListTemp.filter(x => x.id == data.data.productFound._id)
+                            var duplicatePro = orderListTemp.filter(x => x.id === data.data.productFound._id)
                             if (duplicatePro[0]) {
-                                 var index=orderListTemp.findIndex(x => x.id == data.data.productFound._id)
+                                 var index=orderListTemp.findIndex(x => x.id === data.data.productFound._id)
                                 if (index > -1) {
                                     orderListTemp.splice(index, 1);
                                 }
@@ -136,7 +133,7 @@ class Shop extends Component {
     }
     submitComment = (e) => {
         e.preventDefault();
-        if (this.state.user && document.getElementsByClassName("userInputCM")[0].value != "") {
+        if (this.state.user && document.getElementsByClassName("userInputCM")[0].value !== "") {
             this.setState({
                 modal: false
             });
@@ -162,7 +159,7 @@ class Shop extends Component {
         }
     }
     render() {
-        var allProduct, slide, comments, related;
+        var allProduct, comments, related;
         if (this.state.shops) {
             related = this.state.shops.map((shop, index) => {
                 // console.log(shop)

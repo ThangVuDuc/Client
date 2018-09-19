@@ -24,16 +24,16 @@ class ProductInProfile extends Component {
         }
 
         return (
-            <Col sm='4' >
-                <Link to={`/shop/${this.props.shop._id}/manager`} >
-                    <div class="card" >
+            <Col sm='4' className='productinshop' >
+                <Link to={`/shop/${this.props.shop._id}/manager`} className='productinshop' >
+                    <div class="card" className='productinshop' >
 
                         <div class="view overlay zoom " >
                             <UncontrolledCarousel items={images} className='img-thumbnail' />
                             {/* <img src={this.props.shop.productList[0].image} class=" img-thumbnail text-center card-img-top" alt="" /> */}
                         </div>
-                        <div className="card-body text-center">
-                            <h4 className="card-title font-weight-bold">{this.props.shop.title}</h4>
+                        <div className="card-body text-center productinshop">
+                            <h4 className="card-title font-weight-bold productinshop">{this.props.shop.title}</h4>
                             <p className="card-text">{this.props.shop.description}</p>
                         </div>
                     </div>

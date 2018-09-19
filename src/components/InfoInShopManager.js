@@ -4,6 +4,7 @@ import { Button, Badge } from "mdbreact";
 import 'bootstrap/dist/css/bootstrap.min.css';
 import UpdateInfoInShopManager from './UpdateInfoInShopManager';
 import OrderListInShop from './OrderListInShop';
+import { withRouter } from "react-router-dom";
 
 
 class InfoInShopManager extends Component {
@@ -18,6 +19,10 @@ class InfoInShopManager extends Component {
         this.setState({
             isUpdate: !this.state.isUpdate
         })
+    }
+
+    _handleOnClickSwitchPage = () => {
+        this.props.history.push(`/shop/${this.props.shopDataBo._id}`)
     }
 
     render() {
@@ -38,13 +43,13 @@ class InfoInShopManager extends Component {
                 </Col>
                 <Col sm='12' lg='3' className='text-right' >
                     <Button size='sm' color='secondary' onClick={this.changeIsUpdate} outline >Thay đổi thông tin cửa hàng</Button>
-                    <div className="cart mt-3 text-center">
+                    <div className="cart mt-5 text-center">
                         <OrderListInShop orderData={this.props.shopDataBo.listOrder} />
-                        <h6 className="mt-2">Danh Sách Ordered</h6>
+                        <h6 className="mt-2">Danh Sách Order</h6>
                     </div>
                 </Col>
-                <Col>
-
+                <Col className='text-center'>
+                    <Button onClick={this._handleOnClickSwitchPage} size='sm' outline color='success'>Xem với tư cách người mua hàng</Button>
                 </Col>
             </Row> : <UpdateInfoInShopManager changeIsUpdate={this.changeIsUpdate} shopID={this.props.shopDataBo._id} />;
 
@@ -56,4 +61,4 @@ class InfoInShopManager extends Component {
     }
 }
 
-export default InfoInShopManager;
+export default withRouter(InfoInShopManager);

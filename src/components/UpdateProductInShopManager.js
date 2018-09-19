@@ -124,7 +124,7 @@ class UpdateProductInShopManager extends Component {
                             </InputGroup>
                         </Col>
                         <Col sm='8' className='mt-4' >
-                            <Base64 className='btn btn-success' multiple={false} onDone={this._getFile.bind(this)} />
+                            <label>Ảnh:</label><Base64 className='btn btn-success' multiple={false} onDone={this._getFile.bind(this)} />
                         </Col>
                         <Col sm='10' className='mt-3 text-center'>
                             <Button onClick={this._handleSubmitButton} color='primary' disabled={this.state.isLoading} >Xác nhận</Button>

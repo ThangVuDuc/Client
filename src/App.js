@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import 'mdbootstrap/css/mdb.min.css';
+// import 'mdbootstrap/css/mdb.min.css';
 // import 'mdbootstrap/js/mdb.min.js';
 // import 'mdbootstrap/js/jquery-3.3.1.min.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
@@ -14,7 +14,7 @@ import Home from './components/Home';
 import Shop from './Container/Shop';
 import Cart from './Container/Cart';
 import { ROOT_API } from "./static/index";
-import { getUserById,getUserByIdFb } from "./networks/userData.js"
+import { getUserByIdFb } from "./networks/userData.js"
 import Profile from './Container/Profile';
 
 
@@ -39,7 +39,7 @@ class App extends Component {
   componentDidMount = () => {
     axios.get(ROOT_API + "/auth/isLogin")
       .then((response) => {
-        if(response.success==1){
+        if(response.success=== 1){
           getUserByIdFb(response.data.user)
           .then(data => {
             this.setState({ userData: response.data.user })
@@ -69,7 +69,7 @@ class App extends Component {
       this.setState({isUpdate:true})
       axios.get(ROOT_API + "/auth/isLogin")
       .then((response) => {
-        if(response.success==1){
+        if(response.success===1){
           getUserByIdFb(response.data.user)
           .then(data => {
             this.setState({ userData: response.data.user })
