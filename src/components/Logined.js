@@ -4,7 +4,8 @@ import OrderCache from './Cache/OrderCache';
 import {
     BrowserRouter as Router,
     Route,
-    Link
+    Link,
+    withRouter
 } from 'react-router-dom'
 import { createSession, getSession } from "../networks/session"
 class Logined extends Component {
@@ -49,13 +50,14 @@ class Logined extends Component {
 
     MyShopLink = (e) => {
         e.preventDefault();
-        // this.props.history.push('/checkout');
-        console.log(this.props)
+        this.props.history.push(`/user/${this.props.userData._id}`);
+        // console.log(this.props.userData._id)
     }
 
     showwww = () => {
         console.log(this.props)
     }
+
 
 
     render() {
@@ -68,7 +70,7 @@ class Logined extends Component {
                     <Button color='danger' >{this.state.orderList.length}<i className="fas fa-shopping-cart"></i></Button>
                 </Link>
                 <OrderCache orderModal={this.state.orderModalOpen} toggle={this.modalToggle} setOrderLength={this.setOrderLength} />
-                <Button disabled >{(this.props.userData) ? this.props.userData.name : ''}</Button>
+                <Button color='blue-grey' disabled >{(this.props.userData) ? this.props.userData.name : ''}</Button>
                 <ButtonDropdown isOpen={this.state.dropdownUserOpen} toggle={this.userToggle}>
                     <DropdownToggle color='success' caret></DropdownToggle>
                     <DropdownMenu right>
@@ -79,7 +81,7 @@ class Logined extends Component {
                             <span className='text-success' ><i className="fas fa-history"></i> </span> Lịch sử đặt hàng
                         </DropdownItem>
                         <DropdownItem onClick={this.MyShopLink} >
-                            {/* <Link to='/checkout'> */}
+                            {/* <Link to={(this.props.userData) ? `/user/${this.props.userData._id}` : ""}> */}
                             <span><span className='text-primary textDeco ' ><i className="fas fa-user"></i></span> Cửa hàng của tôi</span>
                             {/* </Link> */}
                         </DropdownItem>
@@ -94,4 +96,4 @@ class Logined extends Component {
     }
 }
 
-export default Logined;
+export default withRouter(Logined);

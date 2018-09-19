@@ -11,7 +11,7 @@ class NavBar extends Component {
                 <nav className='navbar header fixed-top navber-expland-lg navbar-light'>
                     <div className='container' >
                         <div className='col-4'>
-                            <div className='input-group'>
+                            <div className='input-group mt-3'>
                                 <p style={{width: '100%',color:'rgb(48, 48, 48)',marginBottom: 5}} >Hotline: 0123456789</p>
                                 <p style={{width: '100%',color:'rgb(48, 48, 48)'}}>Địa chỉ: Thắng béo</p>
                             </div> 

@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-
+import 'mdbootstrap/css/mdb.min.css';
+// import 'mdbootstrap/js/mdb.min.js';
+// import 'mdbootstrap/js/jquery-3.3.1.min.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar';
 import axios from "axios";
@@ -114,7 +116,7 @@ class App extends Component {
               return <Shop {...props} user={this.state.userData} />
             }} />
             <Route exact path='/shop/:id/manager' render={(props) => {
-              return <ShopManager {...props} />
+              return <ShopManager {...props} user={this.state.userData} />
             }} />
             <Route exact path='/cart' render={(props) => {
               return <Cart {...props} user={this.state.userData} />
