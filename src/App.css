@@ -586,3 +586,12 @@ transition: .3s;
 .productinshop {
     text-decoration-color: black;
 }
+
+
+.oneProOrder{
+    width: 50%;
+    display:inline-block;
+}
+.OrderSuccess,.OrderFail{
+    margin-top:100px
+}

@@ -52,7 +52,7 @@ class HomeContent extends Component {
         <div className="row">
           {allShops}
         </div>
-        <ul className="pagination justify-content-center">
+        {/* <ul className="pagination justify-content-center">
           <li className="page-item">
             <a className="page-link" href="" aria-label="Previous">
               <span aria-hidden="true">«</span>
@@ -74,7 +74,7 @@ class HomeContent extends Component {
               <span className="sr-only">Next</span>
             </a>
           </li>
-        </ul>
+        </ul> */}
       </div>
 
     );

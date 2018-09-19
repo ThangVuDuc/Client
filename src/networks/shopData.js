@@ -15,3 +15,7 @@ export const updateInfoShopByID = (id,{title, description, openOrClose, comments
     console.log({productList})
     return axios.put(`${ROOT_API}/shop/${id}`, {title, description, openOrClose, comments, productList, listOrder});
 }
+
+export const updateOrderShopByID = (id,{orderID}) => {
+    return axios.put(`${ROOT_API}/shop/${id}/order`, {orderID});
+}

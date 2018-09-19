@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
-import { updateInfoShopByID } from "../networks/shopData"
+import { updateOrderShopByID } from "../networks/shopData"
 import { createSession, getSession, upDateSession } from "../networks/session"
 import { getProductById } from "../networks/productData"
-import { createOrder } from "../networks/orderData"
+import { createOrder, getOrderById } from "../networks/orderData"
 import { updateUserById } from "../networks/userData"
 class Cart extends Component {
     constructor(props) {
@@ -64,17 +64,43 @@ class Cart extends Component {
                     .then(data => {
                         console.log(data)
                         //luu vao user.order
-                        updateUserById(this.state.user._id, { order: data.data.orderCreated._id })
+                        this.state.user.order.push(data.data.orderCreated._id)
+                        updateUserById(this.state.user._id, { order: this.state.user.order })
                             .then(data => {
                                 console.log(data.data)
                                 //luu xong  thi updateSession xoa { owner, address, phoneNumber, orderList, note }
                                 upDateSession({ address: "", phoneNumber: "", orderList: [], note: "" })
                                     .then(data => {
                                         console.log(data);
-                                        this.setState({ orderList: [] ,displaySuccess:'visible d-block'})
+                                        
                                     })
                                     .catch(err => console.log(err))
+                            });
+
+                        getOrderById(data.data.orderCreated._id)
+                            .then(res => {
+                                console.log(res.data.orderFound)
+                                for (let i = 0; i < res.data.orderFound.orderList.length; i++) {
+                                    const element = res.data.orderFound.orderList[i];
+                                    console.log(" Lan " + i)
+                                    let isHave = false;
+                                    for (let j = 0; j < i; j++) {
+                                        const element2 = res.data.orderFound.orderList[j];
+                                        if (element.product.shopID === element2.product.shopID) {
+                                            isHave = true;
+                                            break;
+                                        } 
+                                    }
+                                    if(!isHave) {
+                                        updateOrderShopByID(element.product.shopID, {orderID: data.data.orderCreated._id})
+                                            .then(shopUpdated => {
+                                                console.log(shopUpdated.data)
+                                                this.setState({ orderList: [] ,displaySuccess:'visible d-block'});
+                                            })
+                                    }
+                                }
                             })
+
 
                         
 

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Modal, ModalHeader, ModalBody, Container, ModalFooter, Button, Row, Col } from "reactstrap";
 import { getProductById } from "../networks/productData";
-import { getUserById } from "../networks/userData";
+import { getInfoUserById } from "../networks/userData";
 import ProductOrderListInShop from './ProductOrderListInShop';
 
 class OrderListInShop extends Component {
@@ -13,8 +13,9 @@ class OrderListInShop extends Component {
     componentDidMount() {
         let data = this.props.orderData;
         for (let i = 0; i < data.length; i++) {
-            getUserById(data[i].owner)
+            getInfoUserById(data[i].owner)
                 .then(userRes => {
+                    console.log(userRes)
                     data[i].owner = {
                         name: userRes.data.user.name,
                         _id: userRes.data.user._id,
@@ -53,7 +54,7 @@ class OrderListInShop extends Component {
                             <p>Địa chỉ: <strong>{order.address}</strong></p>
                             <p>Số điện thoại: <strong>{order.phoneNumber}</strong></p>
                             <p>{index}</p>
-                            <ProductOrderListInShop productList={order.orderList} />
+                            <ProductOrderListInShop productList={order.orderList} shopID={this.props.shopID} />
                         </Col>
                     </Row>
                     <hr />

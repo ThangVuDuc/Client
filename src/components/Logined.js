@@ -67,7 +67,8 @@ class Logined extends Component {
 
         return (
             <ButtonGroup>
-                <Button color='danger' onClick={this._MyCartLink} >{this.state.orderList.length}<i className="fas fa-shopping-cart"></i></Button>
+                <Button color='danger' onClick={this._MyCartLink} ><i className="fas fa-shopping-cart"></i></Button>
+                {/* <Button color='danger' onClick={this._MyCartLink} >{this.state.orderList.length}<i className="fas fa-shopping-cart"></i></Button> */}
                 {/* <Link to={"/cart/"} >
                     <Button color='danger' >{this.state.orderList.length}<i className="fas fa-shopping-cart"></i></Button>
                 </Link> */}
@@ -79,9 +80,9 @@ class Logined extends Component {
                         <DropdownItem onClick={this.props.modalShopIsOpen} >
                             <span className='text-warning' ><i className="fas fa-upload"></i> </span> Tạo cửa hàng
                         </DropdownItem>
-                        <DropdownItem >
+                        {/* <DropdownItem >
                             <span className='text-success' ><i className="fas fa-history"></i> </span> Lịch sử đặt hàng
-                        </DropdownItem>
+                        </DropdownItem> */}
                         <DropdownItem onClick={this.MyShopLink} >
                             {/* <Link to={(this.props.userData) ? `/user/${this.props.userData._id}` : ""}> */}
                             <span><span className='text-primary textDeco ' ><i className="fas fa-user"></i></span> Cửa hàng của tôi</span>

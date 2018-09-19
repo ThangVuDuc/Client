@@ -248,10 +248,10 @@ class Shop extends Component {
                                         <div className="avatarHost ">
                                             {this.state.shop.owner ? <img src={this.state.shop.owner.avatarUrl} /> : ""}
                                         </div>
-                                        <div className="cart mt-3">
-                                            {(this.state.shop) ? <OrderListInShop orderData={this.state.shop.listOrder} /> : ''}
+                                        {/* <div className="cart mt-3">
+                                            {(this.state.shop) ? <OrderListInShop shopID={this.state.shop._id} orderData={this.state.shop.listOrder} /> : ''}
                                             <h6 className="mt-2">Ordered in shop</h6>
-                                        </div>
+                                        </div> */}
                                     </div>
                                     <div className="mainStatus col-md-10">
                                         <h4>
