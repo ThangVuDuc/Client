@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 // import FooterPage from '../components/FooterPage'
 import HomeContent from './HomeContent'
 import Banner from './Banner'
-import pic1 from '../img/Banner1.jpg';
-import pic2 from '../img/Banner2.jpg';
-import pic3 from '../img/Banner3.jpg';
+import pic1 from '../img/banner1.jpg';
+import pic2 from '../img/banner2.jpg';
+import pic3 from '../img/banner3.jpg';
 
 class home extends Component {
     state = {
