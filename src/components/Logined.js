@@ -20,11 +20,6 @@ class Logined extends Component {
     }
     componentDidMount() {
         this.setState({ user: this.props.user })
-        getSession()
-            .then(data => {
-                this.setState({ orderList: data.data.session.order.orderList })
-            })
-            .catch(err => console.log(err))
     }
 
     setOrderLength = (value) => {
@@ -65,7 +60,7 @@ class Logined extends Component {
             <ButtonGroup>
                 {/* <Button color='danger' onClick={this.modalToggle} >{orderCount}<i className="fas fa-shopping-cart"></i></Button> */}
                 <Link to={"/cart/"} >
-                    <Button color='danger' >{this.state.orderList.length}<i className="fas fa-shopping-cart"></i></Button>
+                    <Button color='danger' >{this.props.proNu}<i className="fas fa-shopping-cart"></i></Button>
                 </Link>
                 <OrderCache orderModal={this.state.orderModalOpen} toggle={this.modalToggle} setOrderLength={this.setOrderLength} />
                 <Button disabled >{(this.props.userData) ? this.props.userData.name : ''}</Button>

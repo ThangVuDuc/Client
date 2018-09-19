@@ -360,7 +360,7 @@ transition: .3s;
     cursor: pointer;
 }
 .foodPay{
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     border: 1px solid #D7D7D7;
     padding: 20px;
     background: #FFFFFF;
@@ -368,7 +368,7 @@ transition: .3s;
     border-radius: 6px;
 }
 .payment{
-    margin-top: 3rem;
+    margin-top: 2.5rem;
     border: 1px solid #D7D7D7;
     padding: 20px;
     background: #FFFFFF;
@@ -392,7 +392,7 @@ transition: .3s;
     margin-top: 30px;
     width: 100%;
 }
-.payment .inputAddress{
+.payment .inputAddress,.payment .inputPhone{
     float:  right;
     border: 1px solid #eee;
     padding: 5px 10px;
@@ -556,4 +556,7 @@ transition: .3s;
 
    .footer {
        opacity: 0.9;
+   }
+   .OrderSuccess,.OrderFail{
+       margin-top:100px
    }

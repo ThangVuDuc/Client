@@ -14,13 +14,14 @@ import Cart from './Container/Cart';
 import { ROOT_API } from "./static/index";
 import { getUserById,getUserByIdFb } from "./networks/userData.js"
 import Profile from './Container/Profile';
-
-
+import { createSession, getSession } from "./networks/session"
+import UserOrderHis from "./Container/UserOrderHis"
 class App extends Component {
   state = {
     createShopModal: false,
     userData: null,
-    isUpdate:false
+    isUpdate:false,
+    proNu:0
   }
 
   componentDidUpdate(prevProps) {
@@ -35,22 +36,24 @@ class App extends Component {
   }
   //kiem tra dang nhap sau khi mount
   componentDidMount = () => {
-    axios.get(ROOT_API + "/auth/isLogin")
-      .then((response) => {
-        if(response.success==1){
-          getUserByIdFb(response.data.user)
-          .then(data => {
-            this.setState({ userData: response.data.user })
-          })
-          .catch(err => console.log(err))
-        }
-        else{
-          this.setState({ userData: null })
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
+    // axios.get(ROOT_API + "/auth/isLogin")
+    //   .then((response) => {
+    //     if(response.success==1){
+    //       getUserByIdFb(response.data.user)
+    //       .then(data => {
+    //         console.log("dang nhap")
+    //         this.setState({ userData: response.data.user })
+    //       })
+    //       .catch(err => console.log(err))
+    //     }
+    //     else{
+    //       console.log("chua dang nhap")
+    //       this.setState({ userData: null })
+    //     }
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   })
       window.addEventListener("scroll",function(){
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
           document.getElementsByClassName("header")[0].classList.add("headerBg")
@@ -58,32 +61,39 @@ class App extends Component {
           document.getElementsByClassName("header")[0].classList.remove("headerBg");
         }
       })
+      getSession()
+            .then(data => {
+                this.setState({ proNu: data.data.session.order.orderList.length })
+            })
+            .catch(err => console.log(err))
       
   }
 
   //khi  chua dang nhap ma dang nhap thi thay doi state user (did update: an login xong)
-  componentDidUpdate = () => {
-    if(!this.state.isUpdate){
-      this.setState({isUpdate:true})
-      axios.get(ROOT_API + "/auth/isLogin")
-      .then((response) => {
-        if(response.success==1){
-          getUserByIdFb(response.data.user)
-          .then(data => {
-            this.setState({ userData: response.data.user })
-          })
-          .catch(err => console.log(err))
-        }
-        else{
-          this.setState({ userData: null })
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-    }
+  // componentDidUpdate = () => {
+  //   if(!this.state.isUpdate){
+  //     this.setState({isUpdate:true})
+  //     axios.get(ROOT_API + "/auth/isLogin")
+  //     .then((response) => {
+  //       if(response.success==1){
+  //         console.log("dang nhap")
+  //         getUserByIdFb(response.data.user)
+  //         .then(data => {
+  //           this.setState({ userData: response.data.user })
+  //         })
+  //         .catch(err => console.log(err))
+  //       }
+  //       else{
+  //         console.log(" chua dang nhap")
+  //         this.setState({ userData: null })
+  //       }
+  //     })
+  //     .catch(function (error) {
+  //       console.log(error);
+  //     })
+  //   }
    
-  }
+  // }
 
   modalShopIsOpen = () => {
     this.setState({
@@ -99,19 +109,21 @@ class App extends Component {
     });
     console.log(this.state.userData)
   }
-
-  render() {
+  changeProNu=(proNu)=>{
+    this.setState({proNu})
+  }
+  render() { 
     return (
       <BrowserRouter>
         <div id="main">
-          <NavBar  modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} setdata={this._setData} />
+          <NavBar  modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} setdata={this._setData} proNu={this.state.proNu} />
           <Switch>
             <Route exact path='/' render={(props) => {
               console.log(this.state.userData)
-              return <Home {...props} user={this.state.userData} />
+              return <Home {...props} user={this.state.userData} /> 
             }} />
             <Route exact path='/shop/:id' render={(props) => {
-              return <Shop {...props} user={this.state.userData} />
+              return <Shop {...props} user={this.state.userData} changeProNu={this.changeProNu} />
             }} />
             <Route exact path='/shop/:id/manager' render={(props) => {
               return <ShopManager {...props} />
@@ -121,6 +133,9 @@ class App extends Component {
             }} />
             <Route exact path='/user/:id' render={(props) => {
               return <Profile {...props}  user={this.state.userData} />
+            }} />
+            <Route exact path='/historyOrder' render={(props) => {
+              return <UserOrderHis {...props}  user={this.state.userData} />
             }} />
           </Switch>
           <CreateShop createShopModal={this.state.createShopModal} modalShopIsOpen={this.modalShopIsOpen} userData={this.state.userData} />

@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 
 class NavBar extends Component {
     render() {
-        return (
+        return ( 
             <div>
                 <nav className='navbar header fixed-top navber-expland-lg navbar-light'>
                     <div className='container' >
@@ -23,7 +23,7 @@ class NavBar extends Component {
                                 </Link>
                             </div> 
                         </div>
-                        <LoginFace  modalShopIsOpen={this.props.modalShopIsOpen} userData={this.props.userData} setdata={this.props.setdata} />
+                        <LoginFace proNu={this.props.proNu}  modalShopIsOpen={this.props.modalShopIsOpen} userData={this.props.userData} setdata={this.props.setdata} />
                         
 
                     </div>

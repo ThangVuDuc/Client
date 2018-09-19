@@ -7,4 +7,7 @@ export const createSession = ({ owner, address, phoneNumber, orderList, note }) 
 } 
 export const getSession = () => {
     return axios.get(`${ROOT_API}/auth`);
+}  
+export const upDateSession = ({ address, phoneNumber, orderList, note }) => {
+    return axios.put(`${ROOT_API}/auth`,{ address, phoneNumber, orderList, note });
 } 

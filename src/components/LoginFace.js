@@ -14,7 +14,7 @@ class Facebook extends Component {
         user: "",
         isUpdate:false
     }
-    componentDidMount = () => {
+    componentDidMount = () => { 
         this.checkLogin();
     }
     
@@ -93,7 +93,7 @@ class Facebook extends Component {
         if (this.state.isLoggedIn == 1) {
             fbContent = (
                 <div>
-                    {(this.state.isLoggedIn == 1) ? <Logined fbLogout={this.logout} userData={this.props.userData}  modalShopIsOpen={this.props.modalShopIsOpen} /> : ''}
+                    {(this.state.isLoggedIn == 1) ? <Logined proNu={this.props.proNu} fbLogout={this.logout} userData={this.props.userData}  modalShopIsOpen={this.props.modalShopIsOpen} /> : ''}
                 </div>
             );
         }
