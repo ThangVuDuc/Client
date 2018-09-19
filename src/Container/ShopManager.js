@@ -28,12 +28,6 @@ class ShopManager extends Component {
             })
     }
 
-<<<<<<< HEAD
-    _handleUpdateData = (updateData) => {
-
-        this.setState({
-            shopDataOng: updateData
-=======
     _checkFbData = () => {
         console.log()
     }
@@ -42,7 +36,6 @@ class ShopManager extends Component {
 
         this.setState({
             shopData: updateData
->>>>>>> MInhDuc
         })
         console.log(updateData);
         
@@ -60,11 +53,7 @@ class ShopManager extends Component {
                     <div className='shadow p-3 mb-5 bg-white rounded img-thumbnail' >
                         {showInfoShop}
                         <hr />
-<<<<<<< HEAD
-                        <ProductInShopManager shopData={this.state.shopDataOng} handleUpdateData={this._handleUpdateData}  />
-=======
                         <ProductInShopManager shopData={this.state.shopDataOng} UpdateInfo={this.UpdateInfo} />
->>>>>>> MInhDuc
                     </div>
                 </Container>
             </div>

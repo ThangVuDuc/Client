@@ -26,18 +26,6 @@ class FooterPage extends React.Component {
             <div className="footer">
                 <Container fluid>
                     <Row>
-<<<<<<< HEAD
-                        <Col style={{padding:'0'}}>
-                            <Slider className='mb-5' {...settings}>
-                                <div>
-                                    <img src={Banner1} style={{width: '100%'}} />
-                                </div>
-                                <div>
-                                    <img src={Banner2}style={{width: '100%'}} />
-                                </div>
-                                <div>
-                                    <img src={Banner3} style={{width: '100%'}} />
-=======
                         <Col>
                             <Slider className='img-fluid mb-5' {...settings}>
                                 <div>
@@ -48,7 +36,6 @@ class FooterPage extends React.Component {
                                 </div>
                                 <div>
                                     <img src={Banner3} className='img-fluid' />
->>>>>>> MInhDuc
                                 </div>
                             </Slider>
                         </Col>

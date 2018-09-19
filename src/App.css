@@ -522,49 +522,6 @@ transition: .3s;
     border-radius: 50%;
     margin-bottom: 20px;
    }
-<<<<<<< HEAD
-
-   #Duc{
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-   }
-
-   #Thang{
-    width: 180px;
-    height: 180px;
-    border-radius: 50%;
-    margin-bottom: 20px;
-   }
-
-   .ending {
-       line-height: 100px;
-       text-align: center;
-       background-color: #88909b; 
-       margin-top: 50px; 
-       height: 100px; 
-   }
-
-   .ending a {
-       color: black;
-   }
-
-   .ending a:hover {
-    color: #777;
-    text-decoration: none;
-   }
-
-   .footer {
-       opacity: 0.9;
-   }
-   .OrderSuccess,.OrderFail{
-       margin-top:100px;
-   }
-   .mt-50 {
-       margin-top: 100px
-   }
-=======
 
    #Duc{
     width: 180px;
@@ -629,4 +586,3 @@ transition: .3s;
 .productinshop {
     text-decoration-color: black;
 }
->>>>>>> MInhDuc

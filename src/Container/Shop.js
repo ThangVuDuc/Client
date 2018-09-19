@@ -9,11 +9,7 @@ import {
     Link
 } from 'react-router-dom'
 import { updateInfoShopByID } from "../networks/shopData"
-<<<<<<< HEAD
 import { createSession, getSession, upDateSession } from "../networks/session"
-=======
-import { createSession, getSession } from "../networks/session"
->>>>>>> MInhDuc
 
 class Shop extends Component {
     constructor(props) {
@@ -82,15 +78,10 @@ class Shop extends Component {
         this.inputCM.current.focus()
     }
     pushProductToCart = (e) => {
-<<<<<<< HEAD
-=======
-
->>>>>>> MInhDuc
         if (!this.state.user) {
             alert("Bạn chưa đăng nhập")
             e.target.value = 0
         } else {
-<<<<<<< HEAD
             if (e.target.value == 0) {
                 var name = e.target.name;
                 getSession()
@@ -162,63 +153,11 @@ class Shop extends Component {
                     })
                     .catch(err => console.log(err))
             }
-=======
-            var name = e.target.name;
-            var amount=e.target.value;
-            //lay session ve truoc de kiem tra orderList
-            getSession()
-                .then(data => {
-                    // console.log(data.data.session)
-                    var orderListTemp = data.data.session.order ? data.data.session.order.orderList : []
-                    // console.log(orderListTemp)
-                    getProductById(name)//lay san pham duoc chon
-                        .then(data => {
-
-                            var duplicatePro = orderListTemp.filter(x => x.id === data.data.productFound._id)
-                            if (duplicatePro[0]) {
-                                 var index=orderListTemp.findIndex(x => x.id === data.data.productFound._id)
-                                if (index > -1) {
-                                    orderListTemp.splice(index, 1);
-                                }
-                                orderListTemp.push({
-                                    id: data.data.productFound._id,
-                                    shopID: {
-                                        _id: data.data.productFound.shopID._id
-                                    },
-                                    name: data.data.productFound.name,
-                                    image: data.data.productFound.image,
-                                    price: data.data.productFound.price,
-                                    amount: amount
-                                })
-                            }
-                            else {
-                                orderListTemp.push({
-                                    id: data.data.productFound._id,
-                                    shopID: {
-                                        _id: data.data.productFound.shopID._id
-                                    },
-                                    name: data.data.productFound.name,
-                                    image: data.data.productFound.image,
-                                    price: data.data.productFound.price,
-                                    amount: 1
-                                })
-                            }
-                            createSession({ owner: this.state.user._id, orderList: orderListTemp })
-                                .then(data => console.log(data.data))
-                                .catch(err => console.log(err))
-                        })
-                })
-                .catch(err => console.log(err))
->>>>>>> MInhDuc
         }
     }
     submitComment = (e) => {
         e.preventDefault();
-<<<<<<< HEAD
         if (this.state.user && document.getElementsByClassName("userInputCM")[0].value != "") {
-=======
-        if (this.state.user && document.getElementsByClassName("userInputCM")[0].value !== "") {
->>>>>>> MInhDuc
             this.setState({
                 modal: false
             });
@@ -244,11 +183,7 @@ class Shop extends Component {
         }
     }
     render() {
-<<<<<<< HEAD
-        var allProduct, slide, comments, related;
-=======
         var allProduct, comments, related;
->>>>>>> MInhDuc
         if (this.state.shops) {
             related = this.state.shops.map((shop, index) => {
                 // console.log(shop)
