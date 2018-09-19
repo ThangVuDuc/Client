@@ -22,12 +22,8 @@ class App extends Component {
   state = {
     createShopModal: false,
     userData: null,
-<<<<<<< HEAD
     isUpdate:false,
     proNu:0
-=======
-    isUpdate: false
->>>>>>> MInhDuc
   }
 
   componentDidUpdate(prevProps) {
@@ -42,25 +38,6 @@ class App extends Component {
   }
   //kiem tra dang nhap sau khi mount
   componentDidMount = () => {
-<<<<<<< HEAD
-    // axios.get(ROOT_API + "/auth/isLogin")
-    //   .then((response) => {
-    //     if(response.success==1){
-    //       getUserByIdFb(response.data.user)
-    //       .then(data => {
-    //         console.log("dang nhap")
-    //         this.setState({ userData: response.data.user })
-    //       })
-    //       .catch(err => console.log(err))
-    //     }
-    //     else{
-    //       console.log("chua dang nhap")
-    //       this.setState({ userData: null })
-    //     }
-    //   })
-    //   .catch(function (error) {
-    //     console.log(error);
-    //   })
       window.addEventListener("scroll",function(){
         if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
           document.getElementsByClassName("header")[0].classList.add("headerBg")
@@ -101,57 +78,6 @@ class App extends Component {
   //   }
    
   // }
-=======
-    axios.get(ROOT_API + "/auth/isLogin")
-      .then((response) => {
-        if (response.success === 1) {
-          getUserByIdFb(response.data.user)
-            .then(data => {
-              this.setState({ userData: response.data.user })
-            })
-            .catch(err => console.log(err))
-        }
-        else {
-          this.setState({ userData: null })
-        }
-      })
-      .catch(function (error) {
-        console.log(error);
-      })
-    window.addEventListener("scroll", function () {
-      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
-        document.getElementsByClassName("header")[0].classList.add("headerBg")
-      } else {
-        document.getElementsByClassName("header")[0].classList.remove("headerBg");
-      }
-    })
-
-  }
-
-  //khi  chua dang nhap ma dang nhap thi thay doi state user (did update: an login xong)
-  componentDidUpdate = () => {
-    if (!this.state.isUpdate) {
-      this.setState({ isUpdate: true })
-      axios.get(ROOT_API + "/auth/isLogin")
-        .then((response) => {
-          if (response.success === 1) {
-            getUserByIdFb(response.data.user)
-              .then(data => {
-                this.setState({ userData: response.data.user })
-              })
-              .catch(err => console.log(err))
-          }
-          else {
-            this.setState({ userData: null })
-          }
-        })
-        .catch(function (error) {
-          console.log(error);
-        })
-    }
-
-  }
->>>>>>> MInhDuc
 
   modalShopIsOpen = () => {
     this.setState({
@@ -167,15 +93,10 @@ class App extends Component {
     });
     console.log(this.state.userData)
   }
-<<<<<<< HEAD
   changeProNu=(proNu)=>{
     this.setState({proNu})
   }
   render() { 
-=======
-
-  render() {
->>>>>>> MInhDuc
     return (
       <BrowserRouter>
         <div id="main">
@@ -183,11 +104,7 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={(props) => {
               console.log(this.state.userData)
-<<<<<<< HEAD
               return <Home {...props} user={this.state.userData} /> 
-=======
-              return <Home {...props} user={this.state.userData} />
->>>>>>> MInhDuc
             }} />
             <Route exact path='/shop/:id' render={(props) => {
               return <Shop {...props} user={this.state.userData} changeProNu={this.changeProNu} />

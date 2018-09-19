@@ -1,10 +1,4 @@
 import React, { Component } from 'react';
-<<<<<<< HEAD
-import pic1 from '../img/banner1.jpg';
-import pic2 from '../img/banner2.jpg';
-import pic3 from '../img/banner3.jpg';
-=======
->>>>>>> MInhDuc
 import { Container, Row, Col } from "reactstrap";
 
 import Slider from "react-slick";
