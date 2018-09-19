@@ -1,7 +1,4 @@
 import React, { Component } from 'react';
-import pic1 from '../img/pic1.png';
-import pic2 from '../img/pic2.png';
-import pic3 from '../img/pic3.png';
 import { Container, Row, Col } from "reactstrap";
 import 'bootstrap/dist/css/bootstrap.min.css'
 

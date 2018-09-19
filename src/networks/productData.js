@@ -9,3 +9,10 @@ export const getProductById = (id) => {
 export const createProduct = ({ shopID, name, image, price }) => {
     return axios.post(`${ROOT_API}/product`,{ shopID, name, image, price });
 }
+<<<<<<< HEAD
+=======
+
+export const updateProductById = (id, { name, image, price }) => {
+    return axios.put(`${ROOT_API}/product/${id}`,{ name, image, price });
+}
+>>>>>>> MInhDuc

@@ -522,6 +522,7 @@ transition: .3s;
     border-radius: 50%;
     margin-bottom: 20px;
    }
+<<<<<<< HEAD
 
    #Duc{
     width: 180px;
@@ -563,3 +564,69 @@ transition: .3s;
    .mt-50 {
        margin-top: 100px
    }
+=======
+
+   #Duc{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+   }
+
+   #Thang{
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+   }
+
+   .ending {
+       line-height: 100px;
+       text-align: center;
+       background-color: #88909b; 
+       margin-top: 50px; 
+       height: 100px; 
+   }
+
+   .ending a {
+       color: black;
+   }
+
+   .ending a:hover {
+    color: #777;
+    text-decoration: none;
+   }
+
+   .footer {
+       opacity: 0.9;
+   }
+
+   .mt-50 {
+       margin-top: 100px
+   }
+
+.mdbColorLighten5 {
+    background-color: #d0d6e2
+}
+
+.femalegendercolor {
+    color: rgb(240, 98, 146)
+}
+
+.malegendercolor {
+    color: rgb(22, 101, 192)
+}
+
+.mailcolor {
+    color: rgb(249, 168, 37);
+}
+
+.productinshop:hover {
+    text-decoration-line:  none;
+    
+}
+
+.productinshop {
+    text-decoration-color: black;
+}
+>>>>>>> MInhDuc

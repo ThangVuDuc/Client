@@ -1,7 +1,10 @@
 import React, { Component } from 'react';
 import {
+<<<<<<< HEAD
     BrowserRouter as Router,
     Route,
+=======
+>>>>>>> MInhDuc
     Link
   } from 'react-router-dom'
 class OneShopDiv extends Component {

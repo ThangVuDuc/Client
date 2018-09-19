@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
-
+// import 'mdbootstrap/css/mdb.min.css';
+// import 'mdbootstrap/js/mdb.min.js';
+// import 'mdbootstrap/js/jquery-3.3.1.min.js';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import NavBar from './components/NavBar';
 import axios from "axios";
@@ -12,7 +14,7 @@ import Home from './components/Home';
 import Shop from './Container/Shop';
 import Cart from './Container/Cart';
 import { ROOT_API } from "./static/index";
-import { getUserById,getUserByIdFb } from "./networks/userData.js"
+import { getUserByIdFb } from "./networks/userData.js"
 import Profile from './Container/Profile';
 import { createSession, getSession } from "./networks/session"
 import UserOrderHis from "./Container/UserOrderHis"
@@ -20,8 +22,12 @@ class App extends Component {
   state = {
     createShopModal: false,
     userData: null,
+<<<<<<< HEAD
     isUpdate:false,
     proNu:0
+=======
+    isUpdate: false
+>>>>>>> MInhDuc
   }
 
   componentDidUpdate(prevProps) {
@@ -36,6 +42,7 @@ class App extends Component {
   }
   //kiem tra dang nhap sau khi mount
   componentDidMount = () => {
+<<<<<<< HEAD
     // axios.get(ROOT_API + "/auth/isLogin")
     //   .then((response) => {
     //     if(response.success==1){
@@ -94,6 +101,57 @@ class App extends Component {
   //   }
    
   // }
+=======
+    axios.get(ROOT_API + "/auth/isLogin")
+      .then((response) => {
+        if (response.success === 1) {
+          getUserByIdFb(response.data.user)
+            .then(data => {
+              this.setState({ userData: response.data.user })
+            })
+            .catch(err => console.log(err))
+        }
+        else {
+          this.setState({ userData: null })
+        }
+      })
+      .catch(function (error) {
+        console.log(error);
+      })
+    window.addEventListener("scroll", function () {
+      if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementsByClassName("header")[0].classList.add("headerBg")
+      } else {
+        document.getElementsByClassName("header")[0].classList.remove("headerBg");
+      }
+    })
+
+  }
+
+  //khi  chua dang nhap ma dang nhap thi thay doi state user (did update: an login xong)
+  componentDidUpdate = () => {
+    if (!this.state.isUpdate) {
+      this.setState({ isUpdate: true })
+      axios.get(ROOT_API + "/auth/isLogin")
+        .then((response) => {
+          if (response.success === 1) {
+            getUserByIdFb(response.data.user)
+              .then(data => {
+                this.setState({ userData: response.data.user })
+              })
+              .catch(err => console.log(err))
+          }
+          else {
+            this.setState({ userData: null })
+          }
+        })
+        .catch(function (error) {
+          console.log(error);
+        })
+    }
+
+  }
+>>>>>>> MInhDuc
 
   modalShopIsOpen = () => {
     this.setState({
@@ -109,10 +167,15 @@ class App extends Component {
     });
     console.log(this.state.userData)
   }
+<<<<<<< HEAD
   changeProNu=(proNu)=>{
     this.setState({proNu})
   }
   render() { 
+=======
+
+  render() {
+>>>>>>> MInhDuc
     return (
       <BrowserRouter>
         <div id="main">
@@ -120,19 +183,23 @@ class App extends Component {
           <Switch>
             <Route exact path='/' render={(props) => {
               console.log(this.state.userData)
+<<<<<<< HEAD
               return <Home {...props} user={this.state.userData} /> 
+=======
+              return <Home {...props} user={this.state.userData} />
+>>>>>>> MInhDuc
             }} />
             <Route exact path='/shop/:id' render={(props) => {
               return <Shop {...props} user={this.state.userData} changeProNu={this.changeProNu} />
             }} />
             <Route exact path='/shop/:id/manager' render={(props) => {
-              return <ShopManager {...props} />
+              return <ShopManager {...props} user={this.state.userData} />
             }} />
             <Route exact path='/cart' render={(props) => {
               return <Cart {...props} user={this.state.userData} />
             }} />
             <Route exact path='/user/:id' render={(props) => {
-              return <Profile {...props}  user={this.state.userData} />
+              return <Profile {...props} user={this.state.userData} />
             }} />
             <Route exact path='/historyOrder' render={(props) => {
               return <UserOrderHis {...props}  user={this.state.userData} />

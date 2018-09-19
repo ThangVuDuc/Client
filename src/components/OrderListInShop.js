@@ -37,7 +37,6 @@ class OrderListInShop extends Component {
         this.setState({
             listModal: !this.state.listModal
         })
-        console.log(this.state.orderData)
     }
 
     render() {

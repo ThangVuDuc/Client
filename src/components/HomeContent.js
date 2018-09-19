@@ -33,6 +33,7 @@ class HomeContent extends Component {
     if (this.state.shops) {
       allShops = this.state.shops.map(shop => {
         // console.log(shop)
+<<<<<<< HEAD
         if(shop.openOrClose){
           if (this.state.user) {
             if(shop.owner._id==this.state.user._id){
@@ -45,6 +46,18 @@ class HomeContent extends Component {
             <OneShopDiv key={shop._id} shop={shop} link={shop._id} />
           )
         }
+=======
+        if (this.state.user) {
+          if(shop.owner._id===this.state.user._id){
+            return (
+              <OneShopDiv key={shop._id} shop={shop} link={shop._id+"/manager"} />
+            )
+          }
+        }
+        return (
+          <OneShopDiv key={shop._id} shop={shop} link={shop._id} />
+        )
+>>>>>>> MInhDuc
       })
     }
     return (

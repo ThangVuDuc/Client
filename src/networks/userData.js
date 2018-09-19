@@ -15,5 +15,6 @@ export const getInfoUserById = (id) => {
 }
 
 export const updateUserById = (id, { name, email, avatarUrl, gender, shop, order }) => {
+    console.log(shop);
     return axios.put(`${ROOT_API}/user/${id}`, { name, email, avatarUrl, gender, shop, order });
 }

@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+<<<<<<< HEAD
 import { updateInfoShopByID } from "../networks/shopData"
 import { createSession, getSession, upDateSession } from "../networks/session"
 import { getProductById } from "../networks/productData"
 import { createOrder } from "../networks/orderData"
 import { updateUserById } from "../networks/userData"
+=======
+import { createSession, getSession } from "../networks/session"
+import { getProductById } from "../networks/productData"
+>>>>>>> MInhDuc
 class Cart extends Component {
     constructor(props) {
         super(props);
@@ -11,6 +16,7 @@ class Cart extends Component {
             orderList: [],
             user: null,
             total: 0,
+<<<<<<< HEAD
             isUpdate: false,
             displaySuccess:'invisible d-none',
             displayFail:'invisible d-none'
@@ -20,6 +26,14 @@ class Cart extends Component {
         if (this.state.user != this.props.user)
             this.setState({ user: this.props.user })
             console.log(this.state.user)
+=======
+            isUpdate: false
+        }
+    }
+    componentDidUpdate() {
+        if (this.state.user !== this.props.user)
+            this.setState({ user: this.props.user })
+>>>>>>> MInhDuc
         // if (this.state.isUpdate) {
         //     getSession()
         //         .then(data => {
@@ -36,6 +50,7 @@ class Cart extends Component {
             })
             .catch(err => console.log(err))
     }
+<<<<<<< HEAD
     handleRemovePro = (e) => {
         var tempOrderList = this.state.orderList
         var onePro = tempOrderList.filter(x => x.id == e.target.name)
@@ -103,6 +118,8 @@ class Cart extends Component {
         }
 
     }
+=======
+>>>>>>> MInhDuc
     pushProductSession = (e) => {
         var name = e.target.name;
         var amount = e.target.value;
@@ -117,11 +134,19 @@ class Cart extends Component {
                 getProductById(name)//lay san pham duoc chon
                     .then(data => {
 
+<<<<<<< HEAD
                         var duplicatePro = orderListTemp.filter(x => x.id == data.data.productFound._id)
                         if (duplicatePro[0]) {
                             var index = orderListTemp.findIndex(x => x.id == data.data.productFound._id)
                             if (index > -1) {
                                 orderListTemp[index] = {
+=======
+                        var duplicatePro = orderListTemp.filter(x => x.id === data.data.productFound._id)
+                        if (duplicatePro[0]) {
+                            var index = orderListTemp.findIndex(x => x.id === data.data.productFound._id)
+                            if (index > -1) {
+                                orderListTemp[index]={
+>>>>>>> MInhDuc
                                     id: data.data.productFound._id,
                                     shopID: {
                                         _id: data.data.productFound.shopID._id
@@ -137,7 +162,11 @@ class Cart extends Component {
                             .then(data => {
                                 console.log(data.data)
                                 // this.setState({ isUpdate: true })
+<<<<<<< HEAD
                                 this.setState({ total: this.getOrderTemp().totalTemp, orderList: data.data.order.orderList })
+=======
+                                this.setState({ total: this.getOrderTemp().totalTemp,orderList:data.data.order.orderList })
+>>>>>>> MInhDuc
                                 // this.setState({ isUpdate: false })
                             })
                             .catch(err => console.log(err))
@@ -159,9 +188,15 @@ class Cart extends Component {
                         <input type="number" name={order.id} onChange={this.pushProductSession} defaultValue={order.amount} min={0} max={100} className="slsp" />
                         <div className="foodPrice">{order.price}</div>
                     </div>
+<<<<<<< HEAD
                     <input className=" removeFood btn btn-danger" name={order.id} onClick={this.handleRemovePro} defaultValue="X Remove" />
                     <div className="note">
                         <input type="text" name={order.id} onChange={this.handleNoteChange} placeholder="ghi chú" defaultValue={order.note ? order.note : ""} />
+=======
+                    <div className=" removeFood btn btn-danger">x Remove</div>
+                    <div className="note">
+                        <input type="text" placeholder="ghi chú" />
+>>>>>>> MInhDuc
                     </div>
                     <hr />
                 </div>
@@ -188,6 +223,7 @@ class Cart extends Component {
                                 <div className="card-body">
                                     <h4 className="card-title">Thông tin đơn hàng</h4>
                                     <p className="card-text">Tạm tính</p>
+<<<<<<< HEAD
                                     <div className="totalPrice">
                                         {this.getOrderTemp().totalTemp.toString().replace(/(\d)(?=(\d\d\d)+(?!\d))/g, "$1.")} Đ
                                     </div>
@@ -201,6 +237,15 @@ class Cart extends Component {
                                             <input required className="inputPhone col-8" type="number" placeholder="SĐT" />
                                         </div>
                                         <input style={{ marginTop: 20, width: "100%" }} className="btn btn-warning" type="submit" value="Đặt Hàng" />
+=======
+                                    <div className="totalPrice">{this.getOrderTemp().totalTemp} Đ</div>
+                                    <form>
+                                        <label>Nhập địa chỉ:</label>
+                                        <input className="inputAddress" type="text" placeholder="Địa chỉ" />
+                                        <label>Số điện thoại:</label>
+                                        <input className="inputAddress" type="number" placeholder="SĐT" />
+                                        <button className="btn btn-warning">Đặt Hàng</button>
+>>>>>>> MInhDuc
                                     </form>
                                 </div>
                             </div>

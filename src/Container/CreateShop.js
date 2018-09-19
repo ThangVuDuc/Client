@@ -33,7 +33,9 @@ class CreateShop extends Component {
         });
         createShop(this.state.shopData)
             .then(res => {
-                updateUserById(this.props.userData._id, { shop: res.data.shopCreated._id })
+                let shopp = this.props.userData.shop;
+                shopp.push(res.data.shopCreated._id)
+                updateUserById(this.props.userData._id, { shop: shopp })
                     .then(save => {
                         console.log(save.data)
                         this.props.modalShopIsOpen();
